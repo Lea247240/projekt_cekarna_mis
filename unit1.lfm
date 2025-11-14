@@ -1,10 +1,20 @@
 object Form1: TForm1
-  Left = 998
-  Height = 240
-  Top = 355
-  Width = 320
+  Left = 1241
+  Height = 856
+  Top = 472
+  Width = 1075
   Caption = 'Form1'
+  ClientHeight = 856
+  ClientWidth = 1075
   Color = 12615935
-  DesignTimePPI = 120
-  LCLVersion = '4.2.0.0'
+  DesignTimePPI = 144
+  LCLVersion = '4.4.0.0'
+  object Button1: TButton
+    Left = 400
+    Height = 38
+    Top = 114
+    Width = 113
+    Caption = 'Nikolka'
+    TabOrder = 0
+  end
 end
