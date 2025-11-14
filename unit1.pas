@@ -13,6 +13,7 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
+    Button2: TButton;
     procedure Button2Click(Sender: TObject);
   private
 
