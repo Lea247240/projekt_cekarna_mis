@@ -1,0 +1,79 @@
+CREATE TABLE Pacient (
+    PacientID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Jmeno VARCHAR(100),
+    Heslo VARCHAR(50),
+    Telefon VARCHAR(20)
+);
+
+
+CREATE TABLE Vykon (
+    VykonID INTEGER PRIMARY KEY AUTOINCREMENT,
+    PacientID INTEGER NOT NULL,
+    TypVykonu VARCHAR(100),
+    FOREIGN KEY (PacientID) REFERENCES Pacient(PacientID)
+);
+
+
+
+CREATE TABLE Cekarna (
+    CekarnaID INTEGER PRIMARY KEY AUTOINCREMENT,
+    PacientID INTEGER NOT NULL,
+    Jmeno VARCHAR(100) NOT NULL,
+    Poradi INTEGER NOT NULL,
+    FOREIGN KEY (PacientID) REFERENCES Pacient(PacientID)
+);
+
+
+-- Pacienti
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Jan Novák', 'heslo123', '777123456');
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Petr Svoboda', 'heslo234', '604987321');
+
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Marie Novotná', 'heslo345', '604965821');
+
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Karel Buchtička', 'heslo456', '656987321');
+
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Josef Polívka', 'heslo567', '604987635');
+
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Tereza Omáčková', 'heslo678', '587987321');
+
+
+
+
+-- Vykony
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (1, 'Odběr krve');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (1, 'Měření tlaku');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (2, 'EKG vyšetření');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (3, 'Očkování');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (3, 'Preventivní prohlídka');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (4, 'Pracovní neschopenka');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (5, 'Nemoc');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (6, 'Měření tlaku');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (6, 'EKG vyšetření');

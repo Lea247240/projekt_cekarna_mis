@@ -1,28 +1,96 @@
 object Form1: TForm1
-  Left = 893
-  Height = 713
-  Top = 243
-  Width = 896
+  Left = 469
+  Height = 1190
+  Top = 203
+  Width = 2028
   Caption = 'Form1'
-  ClientHeight = 713
-  ClientWidth = 896
-  Color = 12615935
-  DesignTimePPI = 120
-  LCLVersion = '4.2.0.0'
-  object Button1: TButton
-    Left = 333
-    Height = 32
-    Top = 95
-    Width = 94
-    Caption = 'Nikolka'
+  ClientHeight = 1190
+  ClientWidth = 2028
+  Color = 16707548
+  DesignTimePPI = 144
+  LCLVersion = '4.4.0.0'
+  OnCreate = FormCreate
+  object DBGrid1: TDBGrid
+    Left = 1424
+    Height = 166
+    Top = 1008
+    Width = 312
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSourcePacient
     TabOrder = 0
   end
-  object Button2: TButton
-    Left = 528
-    Height = 31
-    Top = 113
-    Width = 94
-    Caption = 'Leony'
+  object DBGrid2: TDBGrid
+    Left = 1760
+    Height = 161
+    Top = 1008
+    Width = 231
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSourceVykon
     TabOrder = 1
+  end
+  object SQLite3Connection1: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'C:\Users\nikol\School\MPC-MIS\Projekt\projekt_cekarna_mis\Pacienti.db'
+    KeepConnection = False
+    Transaction = SQLTransaction1
+    AlwaysUseBigint = False
+    Left = 80
+    Top = 24
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = SQLite3Connection1
+    Left = 80
+    Top = 104
+  end
+  object SQLQueryPacient: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite3Connection1
+    Transaction = SQLTransaction1
+    Params = <>
+    Macros = <>
+    Left = 88
+    Top = 232
+  end
+  object DataSourcePacient: TDataSource
+    DataSet = SQLQueryPacient
+    OnDataChange = DataSourcePacientDataChange
+    Left = 96
+    Top = 344
+  end
+  object SQLQueryVykon: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite3Connection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM Vykon WHERE PacientID = :PacientID'
+      ''
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'PacientID'
+        ParamType = ptInput
+      end>
+    Macros = <>
+    Left = 1048
+    Top = 240
+  end
+  object DataSourceVykon: TDataSource
+    DataSet = SQLQueryVykon
+    Left = 1048
+    Top = 344
+  end
+  object SQLQueryCekarna: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite3Connection1
+    Transaction = SQLTransaction1
+    Params = <>
+    Macros = <>
+    Left = 138
+    Top = 553
   end
 end
