@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 469
+  Left = 1164
   Height = 1190
   Top = 203
-  Width = 2028
+  Width = 1333
   Caption = 'Form1'
   ClientHeight = 1190
-  ClientWidth = 2028
+  ClientWidth = 1333
   Color = 16707548
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
@@ -30,8 +30,52 @@ object Form1: TForm1
     DataSource = DataSourceVykon
     TabOrder = 1
   end
+  object DBGrid3: TDBGrid
+    Left = 72
+    Height = 304
+    Top = 776
+    Width = 596
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSourceCekarna
+    TabOrder = 2
+  end
+  object ZadejHesloButton: TButton
+    Left = 279
+    Height = 38
+    Top = 160
+    Width = 113
+    Caption = 'Zadej heslo'
+    TabOrder = 3
+    OnClick = ZadejHesloButtonClick
+  end
+  object EditHeslo: TEdit
+    Left = 456
+    Height = 33
+    Top = 160
+    Width = 256
+    TabOrder = 4
+    Text = 'EditHeslo'
+    Visible = False
+  end
+  object PotvrdHeslo: TButton
+    Left = 784
+    Height = 38
+    Top = 155
+    Width = 113
+    Caption = 'OK'
+    TabOrder = 5
+    OnClick = PotvrdHesloClick
+  end
+  object LabelInfo: TLabel
+    Left = 544
+    Height = 25
+    Top = 208
+    Width = 73
+    Caption = 'LabelInfo'
+  end
   object SQLite3Connection1: TSQLite3Connection
-    Connected = False
+    Connected = True
     LoginPrompt = False
     DatabaseName = 'C:\Users\nikol\School\MPC-MIS\Projekt\projekt_cekarna_mis\Pacienti.db'
     KeepConnection = False
@@ -41,7 +85,7 @@ object Form1: TForm1
     Top = 24
   end
   object SQLTransaction1: TSQLTransaction
-    Active = False
+    Active = True
     Database = SQLite3Connection1
     Left = 80
     Top = 104
@@ -88,9 +132,18 @@ object Form1: TForm1
     FieldDefs = <>
     Database = SQLite3Connection1
     Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT Jmeno, Poradi FROM Cekarna ORDER BY Poradi'
+      ''
+    )
     Params = <>
     Macros = <>
-    Left = 138
-    Top = 553
+    Left = 88
+    Top = 520
+  end
+  object DataSourceCekarna: TDataSource
+    DataSet = SQLQueryCekarna
+    Left = 109
+    Top = 660
   end
 end
