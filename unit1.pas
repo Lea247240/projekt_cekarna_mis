@@ -16,6 +16,7 @@ type
     LabelInfo: TLabel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
+    SQLQueryHeslo: TSQLQuery;
     ZadejHesloButton: TButton;
     DataSourceCekarna: TDataSource;
     DataSourceVykon: TDataSource;
@@ -71,37 +72,34 @@ var
   heslo: string;
   PacientID: Integer;
   jmeno: string;
-  tempQuery: TSQLQuery;
 begin
   heslo := EditHeslo.Text;
+
+  // Pokud člověk nic nezadá
   if heslo = '' then
   begin
     LabelInfo.Caption := 'Zadejte heslo!';
     Exit;
   end;
 
-  // --- Lokální query pro ověření hesla ---
-  tempQuery := TSQLQuery.Create(nil);
-  try
-    tempQuery.DataBase := SQLite3Connection1;
-    tempQuery.SQL.Text := 'SELECT PacientID, Jmeno FROM Pacient WHERE Heslo = :h';
-    tempQuery.ParamByName('h').AsString := heslo;
-    tempQuery.Open;
 
-    if tempQuery.IsEmpty then
-    begin
-      LabelInfo.Caption := 'Nesprávné heslo!';
-      Exit;
-    end;
+  SQLQueryHeslo.Close;
+  SQLQueryHeslo.ParamByName('h').AsString := heslo;
+  SQLQueryHeslo.Open;
 
-    PacientID := tempQuery.FieldByName('PacientID').AsInteger;
-    jmeno := tempQuery.FieldByName('Jmeno').AsString;
-
-    LabelInfo.Caption := 'Pacient: ' + jmeno + ', ID: ' + IntToStr(PacientID);
-
-  finally
-    tempQuery.Free;
+  // Pokud zadá špatně
+  if SQLQueryHeslo.IsEmpty then
+  begin
+    LabelInfo.Caption := 'Nesprávné heslo!';
+    Exit;
   end;
+
+  // Načtení informací
+  PacientID := SQLQueryHeslo.FieldByName('PacientID').AsInteger;
+  jmeno := SQLQueryHeslo.FieldByName('Jmeno').AsString;
+
+  LabelInfo.Caption := 'Pacient: ' + jmeno + ', ID: ' + IntToStr(PacientID);
+
 end;
 
 

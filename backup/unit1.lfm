@@ -153,4 +153,22 @@ object Form1: TForm1
     Left = 109
     Top = 660
   end
+  object SQLQueryHeslo: TSQLQuery
+    FieldDefs = <>
+    Database = SQLite3Connection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT PacientID, Jmeno FROM Pacient WHERE Heslo = :h'
+      ''
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'h'
+        ParamType = ptInput
+      end>
+    Macros = <>
+    Left = 419
+    Top = 550
+  end
 end

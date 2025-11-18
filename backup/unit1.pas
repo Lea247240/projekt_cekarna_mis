@@ -16,6 +16,7 @@ type
     LabelInfo: TLabel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
+    SQLQueryHeslo: TSQLQuery;
     ZadejHesloButton: TButton;
     DataSourceCekarna: TDataSource;
     DataSourceVykon: TDataSource;
@@ -58,54 +59,49 @@ begin
   // Načtení pacientů
   SQLQueryPacient.Open;
 
-  SQLQueryVykon.Open; // teď už můžete otevřít rovnou
+  // Načtení výkonu
+  SQLQueryVykon.Open;
 
-
-
-  // --- Načtení čekárny ---   !!!!!!!
   SQLQueryCekarna.Open;
 end;
 
+
+//  Při zmáčknutí tlačítka OK
 procedure TForm1.PotvrdHesloClick(Sender: TObject);
 var
   heslo: string;
   PacientID: Integer;
   jmeno: string;
-  tempQuery: TSQLQuery;
 begin
   heslo := EditHeslo.Text;
+
+  // Pokud člověk nic nezadá
   if heslo = '' then
   begin
     LabelInfo.Caption := 'Zadejte heslo!';
     Exit;
   end;
 
-  // --- Lokální query pro ověření hesla ---
-  tempQuery := TSQLQuery.Create(nil);
-  try
-    tempQuery.DataBase := SQLite3Connection1;
-    tempQuery.SQL.Text := 'SELECT PacientID, Jmeno FROM Pacient WHERE Heslo = :h';
-    tempQuery.ParamByName('h').AsString := heslo;
-    tempQuery.Open;
 
-    if tempQuery.IsEmpty then
-    begin
-      LabelInfo.Caption := 'Nesprávné heslo!';
-      Exit;
-    end;
+SQLQueryHeslo.Close;
+  SQLQueryHeslo.ParamByName('h').AsString := heslo;
+  SQLQueryHeslo.Open;
 
-    PacientID := tempQuery.FieldByName('PacientID').AsInteger;
-    jmeno := tempQuery.FieldByName('Jmeno').AsString;
-
-    LabelInfo.Caption := 'Pacient: ' + jmeno + ', ID: ' + IntToStr(PacientID);
-
-  finally
-    tempQuery.Free;
+  if SQLQueryHeslo.IsEmpty then
+  begin
+    LabelInfo.Caption := 'Nesprávné heslo!';
+    Exit;
   end;
+
+  PacientID := SQLQueryHeslo.FieldByName('PacientID').AsInteger;
+  jmeno := SQLQueryHeslo.FieldByName('Jmeno').AsString;
+
+  LabelInfo.Caption := 'Pacient: ' + jmeno + ', ID: ' + IntToStr(PacientID);
+
 end;
 
 
-
+// Při zmáčknutí tlačítka Zadej heslo
 procedure TForm1.ZadejHesloButtonClick(Sender: TObject);
 begin
   EditHeslo.Visible := True;
@@ -113,8 +109,6 @@ begin
   EditHeslo.SetFocus;
   LabelInfo.Caption := ''; // vyčistí případnou starou zprávu
 end;
-
-
 
 
 
