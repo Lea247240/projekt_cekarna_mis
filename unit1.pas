@@ -28,7 +28,6 @@ type
     SQLQueryVykon: TSQLQuery;
     SQLQueryPacient: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
-    procedure DataSourcePacientDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
@@ -49,18 +48,7 @@ implementation
 
 
 
-procedure TForm1.DataSourcePacientDataChange(Sender: TObject; Field: TField);
-begin
-    if not SQLQueryPacient.IsEmpty then
-    begin
-      SQLQueryVykon.Close;
-      SQLQueryVykon.ParamByName('PacientID').AsInteger :=
-        SQLQueryPacient.FieldByName('PacientID').AsInteger;
-      SQLQueryVykon.Open;
-    end
-    else
-      SQLQueryVykon.Close;
-  end;
+
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -70,11 +58,14 @@ begin
   // Načtení pacientů
   SQLQueryPacient.Open;
 
+  // Načtení výkonu
+  SQLQueryVykon.Open;
 
-  // --- Načtení čekárny ---
   SQLQueryCekarna.Open;
 end;
 
+
+//  Při zmáčknutí tlačítka OK
 procedure TForm1.PotvrdHesloClick(Sender: TObject);
 var
   heslo: string;
@@ -114,7 +105,7 @@ begin
 end;
 
 
-
+// Při zmáčknutí tlačítka Zadej heslo
 procedure TForm1.ZadejHesloButtonClick(Sender: TObject);
 begin
   EditHeslo.Visible := True;
@@ -122,8 +113,6 @@ begin
   EditHeslo.SetFocus;
   LabelInfo.Caption := ''; // vyčistí případnou starou zprávu
 end;
-
-
 
 
 

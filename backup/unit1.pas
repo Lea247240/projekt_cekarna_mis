@@ -49,6 +49,7 @@ implementation
 
 
 
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   // Připojení k databázi
@@ -57,8 +58,11 @@ begin
   // Načtení pacientů
   SQLQueryPacient.Open;
 
+  SQLQueryVykon.Open; // teď už můžete otevřít rovnou
 
-  // --- Načtení čekárny ---
+
+
+  // --- Načtení čekárny ---   !!!!!!!
   SQLQueryCekarna.Open;
 end;
 

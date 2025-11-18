@@ -105,7 +105,6 @@ object Form1: TForm1
   end
   object DataSourcePacient: TDataSource
     DataSet = SQLQueryPacient
-    OnDataChange = DataSourcePacientDataChange
     Left = 96
     Top = 344
   end
@@ -124,6 +123,7 @@ object Form1: TForm1
         ParamType = ptInput
       end>
     Macros = <>
+    DataSource = DataSourcePacient
     Left = 1048
     Top = 240
   end
