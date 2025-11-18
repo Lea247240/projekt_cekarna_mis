@@ -11,10 +11,10 @@ object Form1: TForm1
   LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
   object DBGrid1: TDBGrid
-    Left = 1424
-    Height = 166
-    Top = 1008
-    Width = 312
+    Left = 1088
+    Height = 326
+    Top = 848
+    Width = 648
     Color = clWindow
     Columns = <>
     DataSource = DataSourcePacient
@@ -22,9 +22,9 @@ object Form1: TForm1
   end
   object DBGrid2: TDBGrid
     Left = 1760
-    Height = 161
-    Top = 1008
-    Width = 231
+    Height = 321
+    Top = 848
+    Width = 568
     Color = clWindow
     Columns = <>
     DataSource = DataSourceVykon
@@ -75,7 +75,7 @@ object Form1: TForm1
     Caption = 'LabelInfo'
   end
   object SQLite3Connection1: TSQLite3Connection
-    Connected = True
+    Connected = False
     LoginPrompt = False
     DatabaseName = 'C:\Users\nikol\School\MPC-MIS\Projekt\projekt_cekarna_mis\Pacienti.db'
     KeepConnection = False
@@ -85,7 +85,7 @@ object Form1: TForm1
     Top = 24
   end
   object SQLTransaction1: TSQLTransaction
-    Active = True
+    Active = False
     Database = SQLite3Connection1
     Left = 80
     Top = 104
@@ -94,6 +94,10 @@ object Form1: TForm1
     FieldDefs = <>
     Database = SQLite3Connection1
     Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM Pacient'
+      ''
+    )
     Params = <>
     Macros = <>
     Left = 88
@@ -133,7 +137,10 @@ object Form1: TForm1
     Database = SQLite3Connection1
     Transaction = SQLTransaction1
     SQL.Strings = (
-      'SELECT Jmeno, Poradi FROM Cekarna ORDER BY Poradi'
+      'SELECT Pacient.Jmeno, Cekarna.Poradi'
+      'FROM Cekarna'
+      'JOIN Pacient ON Cekarna.PacientID = Pacient.PacientID'
+      'ORDER BY Cekarna.Poradi'
       ''
     )
     Params = <>

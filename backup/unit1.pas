@@ -28,7 +28,6 @@ type
     SQLQueryVykon: TSQLQuery;
     SQLQueryPacient: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
-    procedure DataSourcePacientDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
@@ -49,18 +48,6 @@ implementation
 
 
 
-procedure TForm1.DataSourcePacientDataChange(Sender: TObject; Field: TField);
-begin
-    if not SQLQueryPacient.IsEmpty then
-    begin
-      SQLQueryVykon.Close;
-      SQLQueryVykon.ParamByName('PacientID').AsInteger :=
-        SQLQueryPacient.FieldByName('PacientID').AsInteger;
-      SQLQueryVykon.Open;
-    end
-    else
-      SQLQueryVykon.Close;
-  end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -68,19 +55,10 @@ begin
   SQLite3Connection1.Connected := True;
 
   // Načtení pacientů
-  SQLQueryPacient.SQL.Text := 'SELECT * FROM Pacient';
   SQLQueryPacient.Open;
 
-  // Načtení výkonů
-  SQLQueryVykon.SQL.Text := 'SELECT * FROM Vykon';
-  SQLQueryVykon.Open;
 
   // --- Načtení čekárny ---
-  SQLQueryCekarna.SQL.Text :=
-    'SELECT Pacient.Jmeno, Cekarna.Poradi ' +
-    'FROM Cekarna ' +
-    'JOIN Pacient ON Cekarna.PacientID = Pacient.PacientID ' +
-    'ORDER BY Cekarna.Poradi';
   SQLQueryCekarna.Open;
 end;
 
@@ -120,8 +98,19 @@ begin
   finally
     tempQuery.Free;
   end;
-
 end;
+
+
+
+procedure TForm1.ZadejHesloButtonClick(Sender: TObject);
+begin
+  EditHeslo.Visible := True;
+  PotvrdHeslo.Visible := True;
+  EditHeslo.SetFocus;
+  LabelInfo.Caption := ''; // vyčistí případnou starou zprávu
+end;
+
+
 
 
 

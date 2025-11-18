@@ -68,19 +68,10 @@ begin
   SQLite3Connection1.Connected := True;
 
   // Načtení pacientů
-  SQLQueryPacient.SQL.Text := 'SELECT * FROM Pacient';
   SQLQueryPacient.Open;
 
-  // Načtení výkonů
-  SQLQueryVykon.SQL.Text := 'SELECT * FROM Vykon';
-  SQLQueryVykon.Open;
 
   // --- Načtení čekárny ---
-  SQLQueryCekarna.SQL.Text :=
-    'SELECT Pacient.Jmeno, Cekarna.Poradi ' +
-    'FROM Cekarna ' +
-    'JOIN Pacient ON Cekarna.PacientID = Pacient.PacientID ' +
-    'ORDER BY Cekarna.Poradi';
   SQLQueryCekarna.Open;
 end;
 
