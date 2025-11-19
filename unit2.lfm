@@ -1,0 +1,56 @@
+object Sestra: TSestra
+  Left = 1456
+  Height = 1129
+  Top = 231
+  Width = 1069
+  Caption = 'Sestra'
+  ClientHeight = 1129
+  ClientWidth = 1069
+  Color = 16766969
+  DesignTimePPI = 144
+  LCLVersion = '4.4.0.0'
+  OnCreate = FormCreate
+  object DBGrid3: TDBGrid
+    Left = 40
+    Height = 304
+    Top = 80
+    Width = 480
+    Color = clWindow
+    Columns = <>
+    DataSource = Pacient.DataSourceCekarna
+    TabOrder = 0
+  end
+  object DBGrid2: TDBGrid
+    Left = 40
+    Height = 321
+    Top = 408
+    Width = 480
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSourceVykon2
+    TabOrder = 1
+  end
+  object SQLQueryVykon2: TSQLQuery
+    FieldDefs = <>
+    Database = Pacient.SQLite3Connection1
+    Transaction = Pacient.SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM Vykon WHERE PacientID = :PacientID'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'PacientID'
+        ParamType = ptInput
+      end>
+    Macros = <>
+    DataSource = Pacient.DataSourceCekarna
+    Left = 592
+    Top = 464
+  end
+  object DataSourceVykon2: TDataSource
+    DataSet = SQLQueryVykon2
+    Left = 592
+    Top = 568
+  end
+end

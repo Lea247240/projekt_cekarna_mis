@@ -10,12 +10,14 @@ uses
 
 type
 
-  { TForm1 }
+  { TPacient }
 
-  TForm1 = class(TForm)
+  TPacient = class(TForm)
+    Button1: TButton;
     LabelInfo: TLabel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
+    SQLQueryCekarnaInsert: TSQLQuery;
     SQLQueryHeslo: TSQLQuery;
     ZadejHesloButton: TButton;
     DataSourceCekarna: TDataSource;
@@ -23,12 +25,12 @@ type
     DataSourcePacient: TDataSource;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
-    DBGrid3: TDBGrid;
     SQLite3Connection1: TSQLite3Connection;
     SQLQueryCekarna: TSQLQuery;
     SQLQueryVykon: TSQLQuery;
     SQLQueryPacient: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
+    procedure OtevriSestru(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
@@ -39,17 +41,18 @@ type
   end;
 
 var
-  Form1: TForm1;
+  Pacient: TPacient;
 
 implementation
-
+    uses
+      Unit2;
 {$R *.lfm}
 
-{ TForm1 }
+{ TPacient }
 
 
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TPacient.FormCreate(Sender: TObject);
 begin
   // Připojení k databázi
   SQLite3Connection1.Connected := True;
@@ -63,9 +66,14 @@ begin
   SQLQueryCekarna.Open;
 end;
 
+procedure TPacient.OtevriSestru(Sender: TObject);
+begin
+   Sestra.Show;
+end;
+
 
 //  Při zmáčknutí tlačítka OK
-procedure TForm1.PotvrdHesloClick(Sender: TObject);
+procedure TPacient.PotvrdHesloClick(Sender: TObject);
 var
   heslo: string;
   PacientID: Integer;
@@ -100,29 +108,28 @@ begin
 
 
 
-  // Načtení pořadí
-  SQLQueryCekarna.Close;
-  SQLQueryCekarna.SQL.Text := 'SELECT COALESCE(MAX(Poradi), 0) + 1 AS dalsiPoradi FROM Cekarna';
-  SQLQueryCekarna.Open;
-  dalsiPoradi := SQLQueryCekarna.FieldByName('dalsiPoradi').AsInteger;
+  // ❗ Výpočet pořadí pomocí SQLQueryCekarnaInsert
+  SQLQueryCekarnaInsert.Close;
+  SQLQueryCekarnaInsert.SQL.Text :=
+    'SELECT COALESCE(MAX(Poradi), 0) + 1 AS dalsiPoradi FROM Cekarna';
+  SQLQueryCekarnaInsert.Open;
 
-  // Vložíme pacienta do čekárny
-  SQLQueryCekarna.Close;
-  SQLQueryCekarna.SQL.Text := 'INSERT INTO Cekarna (PacientID, Jmeno, Poradi) VALUES (:pid, :jmeno, :poradi)';
-  SQLQueryCekarna.ParamByName('pid').AsInteger := PacientID;
-  SQLQueryCekarna.ParamByName('jmeno').AsString := jmeno;
-  SQLQueryCekarna.ParamByName('poradi').AsInteger := dalsiPoradi;
-  SQLQueryCekarna.ExecSQL;
+  dalsiPoradi := SQLQueryCekarnaInsert.FieldByName('dalsiPoradi').AsInteger;
+
+  // ❗ INSERT pacienta do čekárny – opět přes SQLQueryCekarnaInsert
+  SQLQueryCekarnaInsert.Close;
+  SQLQueryCekarnaInsert.SQL.Text :=
+    'INSERT INTO Cekarna (PacientID, Jmeno, Poradi) ' +
+    'VALUES (:pid, :jmeno, :poradi)';
+  SQLQueryCekarnaInsert.ParamByName('pid').AsInteger := PacientID;
+  SQLQueryCekarnaInsert.ParamByName('jmeno').AsString := jmeno;
+  SQLQueryCekarnaInsert.ParamByName('poradi').AsInteger := dalsiPoradi;
+  SQLQueryCekarnaInsert.ExecSQL;
 
   SQLTransaction1.CommitRetaining;
 
   // Znovu načteme čekárnu pro zobrazení
   SQLQueryCekarna.Close;
-  SQLQueryCekarna.SQL.Text :=
-    'SELECT Cekarna.Poradi, Cekarna.PacientID, Pacient.Jmeno ' +
-    'FROM Cekarna ' +
-    'JOIN Pacient ON Cekarna.PacientID = Pacient.PacientID ' +
-    'ORDER BY Cekarna.Poradi';
   SQLQueryCekarna.Open;
 
   LabelInfo.Caption := 'Pacient ' + jmeno + ' přidán do čekárny (pořadí ' + IntToStr(dalsiPoradi) + ')';
@@ -132,7 +139,7 @@ end;
 
 
 // Při zmáčknutí tlačítka Zadej heslo
-procedure TForm1.ZadejHesloButtonClick(Sender: TObject);
+procedure TPacient.ZadejHesloButtonClick(Sender: TObject);
 begin
   EditHeslo.Visible := True;
   PotvrdHeslo.Visible := True;
