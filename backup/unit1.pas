@@ -108,7 +108,7 @@ begin
 
 
 
-  // ❗ Výpočet pořadí pomocí SQLQueryCekarnaInsert
+  // Výpočet pořadí pomocí SQLQueryCekarnaInsert
   SQLQueryCekarnaInsert.Close;
   SQLQueryCekarnaInsert.SQL.Text :=
     'SELECT COALESCE(MAX(Poradi), 0) + 1 AS dalsiPoradi FROM Cekarna';
@@ -116,7 +116,7 @@ begin
 
   dalsiPoradi := SQLQueryCekarnaInsert.FieldByName('dalsiPoradi').AsInteger;
 
-  // ❗ INSERT pacienta do čekárny – opět přes SQLQueryCekarnaInsert
+  // INSERT pacienta do čekárny – opět přes SQLQueryCekarnaInsert
   SQLQueryCekarnaInsert.Close;
   SQLQueryCekarnaInsert.SQL.Text :=
     'INSERT INTO Cekarna (PacientID, Jmeno, Poradi) ' +

@@ -24,6 +24,16 @@ CREATE TABLE Cekarna (
 );
 
 
+CREATE TABLE CiselnikVysetrovna (
+    VysetrovnaID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Cislo INTEGER NOT NULL,
+    Doktor VARCHAR(100)
+);
+
+
+
+
+
 -- Pacienti
 INSERT INTO Pacient (Jmeno, Heslo, Telefon)
 VALUES ('Jan Novák', 'heslo123', '777123456');
@@ -116,5 +126,14 @@ VALUES (10, 'Pracovní neschopenka');
 
 INSERT INTO Vykon (PacientID, TypVykonu)
 VALUES (10, 'Nemoc');
+
+
+
+INSERT INTO CiselnikVysetrovna (Cislo, Doktor) VALUES
+(1, 'MUDr. Karel Křivánek'),
+(2, 'MUDr. Milada Mastná'),
+(3, 'MUDr. Stanislav Sova'),
+(4, 'MUDr. Jiřina Hofmanová'),
+(5, 'MUDr. Bohuslav Buchta');
 
 
