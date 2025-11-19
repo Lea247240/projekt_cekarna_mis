@@ -49,8 +49,6 @@ implementation
 
 
 
-
-
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   // Připojení k databázi
@@ -72,6 +70,7 @@ var
   heslo: string;
   PacientID: Integer;
   jmeno: string;
+  dalsiPoradi: Integer;
 begin
   heslo := EditHeslo.Text;
 
@@ -83,20 +82,51 @@ begin
   end;
 
 
-SQLQueryHeslo.Close;
+  // Ověření hesla
+  SQLQueryHeslo.Close;
   SQLQueryHeslo.ParamByName('h').AsString := heslo;
   SQLQueryHeslo.Open;
 
+  // Pokud zadá špatně
   if SQLQueryHeslo.IsEmpty then
   begin
     LabelInfo.Caption := 'Nesprávné heslo!';
     Exit;
   end;
 
+  // Načtení informací
   PacientID := SQLQueryHeslo.FieldByName('PacientID').AsInteger;
   jmeno := SQLQueryHeslo.FieldByName('Jmeno').AsString;
 
-  LabelInfo.Caption := 'Pacient: ' + jmeno + ', ID: ' + IntToStr(PacientID);
+
+
+  // Načtení pořadí
+  SQLQueryCekarna.Close;
+  SQLQueryCekarna.SQL.Text := 'SELECT COALESCE(MAX(Poradi), 0) + 1 AS dalsiPoradi FROM Cekarna';
+  SQLQueryCekarna.Open;
+  dalsiPoradi := SQLQueryCekarna.FieldByName('dalsiPoradi').AsInteger;
+
+  // Vložíme pacienta do čekárny
+  SQLQueryCekarna.Close;
+  SQLQueryCekarna.SQL.Text := 'INSERT INTO Cekarna (PacientID, Jmeno, Poradi) VALUES (:pid, :jmeno, :poradi)';
+  SQLQueryCekarna.ParamByName('pid').AsInteger := PacientID;
+  SQLQueryCekarna.ParamByName('jmeno').AsString := jmeno;
+  SQLQueryCekarna.ParamByName('poradi').AsInteger := dalsiPoradi;
+  SQLQueryCekarna.ExecSQL;
+
+  SQLTransaction1.CommitRetaining;
+
+  // Znovu načteme čekárnu pro zobrazení
+  SQLQueryCekarna.Close;
+  SQLQueryCekarna.SQL.Text :=
+    'SELECT Cekarna.Poradi, Cekarna.PacientID, Pacient.Jmeno ' +
+    'FROM Cekarna ' +
+    'JOIN Pacient ON Cekarna.PacientID = Pacient.PacientID ' +
+    'ORDER BY Cekarna.Poradi';
+  SQLQueryCekarna.Open;
+
+  LabelInfo.Caption := 'Pacient ' + jmeno + ' přidán do čekárny (pořadí ' + IntToStr(dalsiPoradi) + ')';
+
 
 end;
 

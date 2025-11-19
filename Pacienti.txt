@@ -48,6 +48,22 @@ INSERT INTO Pacient (Jmeno, Heslo, Telefon)
 VALUES ('Tereza Omáčková', 'heslo678', '587987321');
 
 
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Monika Lampičková', 'heslo789', '687985691');
+
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Nikola Kurníková', 'heslo891', '569987321');
+
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('Leoš Kuře', 'heslo912', '569887321');
+
+
+INSERT INTO Pacient (Jmeno, Heslo, Telefon)
+VALUES ('David Popleta', 'heslo147', '963587321');
+
+
 
 
 -- Vykony
@@ -77,3 +93,28 @@ VALUES (6, 'Měření tlaku');
 
 INSERT INTO Vykon (PacientID, TypVykonu)
 VALUES (6, 'EKG vyšetření');
+
+
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (7, 'Odběr krve');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (8, 'Měření tlaku');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (8, 'EKG vyšetření');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (9, 'Očkování');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (10, 'CRP');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (10, 'Pracovní neschopenka');
+
+INSERT INTO Vykon (PacientID, TypVykonu)
+VALUES (10, 'Nemoc');
+
+

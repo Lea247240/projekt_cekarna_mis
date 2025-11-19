@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 1164
-  Height = 1190
-  Top = 203
-  Width = 1333
+  Left = 158
+  Height = 1158
+  Top = 319
+  Width = 1275
   Caption = 'Form1'
-  ClientHeight = 1190
-  ClientWidth = 1333
+  ClientHeight = 1158
+  ClientWidth = 1275
   Color = 16707548
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
@@ -77,7 +77,7 @@ object Form1: TForm1
   object SQLite3Connection1: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Users\nikol\School\MPC-MIS\Projekt\projekt_cekarna_mis\Pacienti.db'
+    DatabaseName = 'Pacienti.db'
     KeepConnection = False
     Transaction = SQLTransaction1
     AlwaysUseBigint = False
@@ -137,7 +137,7 @@ object Form1: TForm1
     Database = SQLite3Connection1
     Transaction = SQLTransaction1
     SQL.Strings = (
-      'SELECT Pacient.Jmeno, Cekarna.Poradi'
+      'SELECT Cekarna.Poradi, Cekarna.PacientID, Pacient.Jmeno'
       'FROM Cekarna'
       'JOIN Pacient ON Cekarna.PacientID = Pacient.PacientID'
       'ORDER BY Cekarna.Poradi'
