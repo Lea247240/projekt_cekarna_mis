@@ -19,6 +19,7 @@ type
     DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
     DBLookupComboBox1: TDBLookupComboBox;
+    SQLQueryDeleteCekarna: TSQLQuery;
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
@@ -46,6 +47,9 @@ procedure TSestra.FormCreate(Sender: TObject);
    begin
 
   // Načtení výkonu
+
+
+
   SQLQueryVykon2.Open;
   SQLQueryVysetrovna.Open;
   DBLookupComboBox1.ListSource := DataSourceVysetrovna;
@@ -57,8 +61,9 @@ procedure TSestra.ZavolatPacienta(Sender: TObject);
 var
   jmenoPacienta: string;
   cisloVysetrovny: string;
+  odpoved: Integer;
+  pacID: Integer;
 begin
-
   if (not Pacient.DataSourceCekarna.DataSet.Active) or (Pacient.DataSourceCekarna.DataSet.IsEmpty) then
   begin
     ShowMessage('Není vybrán žádný pacient!');
@@ -72,12 +77,37 @@ begin
   end;
 
   jmenoPacienta := Pacient.DataSourceCekarna.DataSet.FieldByName('Jmeno').AsString;
-
   cisloVysetrovny := DBLookupComboBox1.Text;
 
-  ShowMessage('Volán pacient: ' + jmenoPacienta + sLineBreak + 'do vyšetřovny: ' + cisloVysetrovny
+  pacID := Pacient.DataSourceCekarna.DataSet.FieldByName('PacientID').AsInteger;
+
+
+  odpoved := MessageDlg(
+    'Opravdu si přejete zavolat pacienta ' + jmenoPacienta + ' do vyšetřovny číslo ' + cisloVysetrovny + '?',
+    mtConfirmation,
+    [mbYes, mbNo],
+    0
   );
+
+  if odpoved = mrYes then
+  begin
+    // 1) Smazání pacienta z čekárny
+    SQLQueryDeleteCekarna.Close;
+    SQLQueryDeleteCekarna.SQL.Text := 'DELETE FROM Cekarna WHERE PacientID = :id';
+    SQLQueryDeleteCekarna.Params.ParamByName('id').AsInteger := pacID;
+    SQLQueryDeleteCekarna.ExecSQL;
+
+    // 2) Obnovení hlavního datasetu, aby pacient zmizel z DBGridu
+    Pacient.SQLQueryCekarna.Close;
+    Pacient.SQLQueryCekarna.Open;
+
+    // 3) Hlaska
+    ShowMessage('Pacient ' + jmenoPacienta + ' byl vyzván do vyšetřovny ' + cisloVysetrovny + '.');
+  end
+  else
+    ShowMessage('Volání pacienta zrušeno.');
 end;
+
 
     end.
 

@@ -89,4 +89,13 @@ object Sestra: TSestra
     Left = 384
     Top = 872
   end
+  object SQLQueryDeleteCekarna: TSQLQuery
+    FieldDefs = <>
+    Database = Pacient.SQLite3Connection1
+    Transaction = Pacient.SQLTransaction1
+    Params = <>
+    Macros = <>
+    Left = 144
+    Top = 1032
+  end
 end

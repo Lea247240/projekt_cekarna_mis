@@ -63,7 +63,15 @@ begin
   // Načtení výkonu
   SQLQueryVykon.Open;
 
+
+  SQLQueryCekarna.RequestLive := True;
+  SQLQueryCekarna.ReadOnly := False;
+
+
   SQLQueryCekarna.Open;
+
+
+
 end;
 
 procedure TPacient.OtevriSestru(Sender: TObject);

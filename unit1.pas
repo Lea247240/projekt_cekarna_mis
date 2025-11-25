@@ -64,6 +64,9 @@ begin
   SQLQueryVykon.Open;
 
   SQLQueryCekarna.Open;
+
+
+
 end;
 
 procedure TPacient.OtevriSestru(Sender: TObject);
