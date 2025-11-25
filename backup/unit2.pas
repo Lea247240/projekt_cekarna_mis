@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, SQLDB, DB, Forms, Controls, Graphics, Dialogs, DBGrids,
-  StdCtrls;
+  StdCtrls, DBCtrls;
 
 type
 
@@ -14,11 +14,11 @@ type
 
   TSestra = class(TForm)
     Button1: TButton;
-    Vysetrovny: TComboBox;
     DataSourceVysetrovna: TDataSource;
     DataSourceVykon2: TDataSource;
     DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
+    DBLookupComboBox1: TDBLookupComboBox;
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
@@ -48,26 +48,44 @@ procedure TSestra.FormCreate(Sender: TObject);
   // Načtení výkonu
   SQLQueryVykon2.Open;
   SQLQueryVysetrovna.Open;
+  DBLookupComboBox1.ListSource := DataSourceVysetrovna;
+  DBLookupComboBox1.ListField := 'Cislo';
+  DBLookupComboBox1.KeyField := 'VysetrovnaID';
 end;
 
 procedure TSestra.ZavolatPacienta(Sender: TObject);
-    var
-      jmenoPacienta: string;
-    begin
-      // Nejprve kontrola, zda je pacient vybrán
-      if (not Pacient.DataSourceCekarna.DataSet.Active)
-         or (Pacient.DataSourceCekarna.DataSet.IsEmpty) then
-      begin
-        ShowMessage('Není vybrán žádný pacient!');
-        Exit;
-      end;
+var
+  jmenoPacienta: string;
+  cisloVysetrovny: string;
+begin
+  // Nejprve kontrola pacienta
+  if (not Pacient.DataSourceCekarna.DataSet.Active)
+     or (Pacient.DataSourceCekarna.DataSet.IsEmpty) then
+  begin
+    ShowMessage('Není vybrán žádný pacient!');
+    Exit;
+  end;
 
-      // Toto se provede jen pokud pacient vybrán je
-      jmenoPacienta :=
-        Pacient.DataSourceCekarna.DataSet.FieldByName('Jmeno').AsString;
+  // Kontrola vyšetřovny
+  if DBLookupComboBox1.KeyValue = Null then
+  begin
+    ShowMessage('Není vybrána vyšetřovna!');
+    Exit;
+  end;
 
-      ShowMessage('Vybrán pacient: ' + jmenoPacienta);
-    end;
+  // Načtení jména pacienta
+  jmenoPacienta :=
+    Pacient.DataSourceCekarna.DataSet.FieldByName('Jmeno').AsString;
+
+  // Načtení čísla vyšetřovny z TDBLookupComboBox
+  cisloVysetrovny := DBLookupComboBox1.Text;
+
+  // Výsledek
+  ShowMessage(
+    'Volán pacient: ' + jmenoPacienta + sLineBreak +
+    'do vyšetřovny: ' + cisloVysetrovny
+  );
+end;
 
     end.
 

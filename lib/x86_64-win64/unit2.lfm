@@ -39,12 +39,11 @@ object Sestra: TSestra
     TabOrder = 2
     OnClick = ZavolatPacienta
   end
-  object Vysetrovny: TDBLookupComboBox
+  object DBLookupComboBox1: TDBLookupComboBox
     Left = 680
     Height = 33
-    Top = 272
+    Top = 264
     Width = 150
-    DataSource = DataSourceVysetrovna
     ListFieldIndex = 0
     LookupCache = False
     TabOrder = 3
@@ -77,12 +76,12 @@ object Sestra: TSestra
     Database = Pacient.SQLite3Connection1
     Transaction = Pacient.SQLTransaction1
     SQL.Strings = (
-      'SELECT * FROM CiselnikVysetrovna ORDER BY Cislo'
+      'SELECT * FROM CiselnikVysetrovna'
       ''
     )
     Params = <>
     Macros = <>
-    Left = 159
+    Left = 160
     Top = 876
   end
   object DataSourceVysetrovna: TDataSource
