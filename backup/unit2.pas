@@ -91,18 +91,21 @@ begin
 
   if odpoved = mrYes then
   begin
-    // DELETE přes nový SQLQuery
+    // 1) Smazání pacienta z čekárny
     SQLQueryDeleteCekarna.Close;
     SQLQueryDeleteCekarna.SQL.Text := 'DELETE FROM Cekarna WHERE PacientID = :id';
     SQLQueryDeleteCekarna.Params.ParamByName('id').AsInteger := pacID;
     SQLQueryDeleteCekarna.ExecSQL;
-    SQLTransactionCekarna.Commit; // uloží změnu do DB
 
+    // 2) Obnovení hlavního datasetu, aby pacient zmizel z DBGridu
+    Pacient.SQLQueryCekarna.Close;
+    Pacient.SQLQueryCekarna.Open;
+
+    DBGrid3.Close;
+    DBGrid3.Open;
+
+    // 3) Hlaska
     ShowMessage('Pacient ' + jmenoPacienta + ' byl vyzván do vyšetřovny ' + cisloVysetrovny + '.');
-
-    // Obnovíme hlavní dataset, aby zmizel ze seznamu
-    SQLQueryCekarna.Close;
-    SQLQueryCekarna.Open;
   end
   else
     ShowMessage('Volání pacienta zrušeno.');

@@ -97,6 +97,8 @@ begin
     SQLQueryDeleteCekarna.Params.ParamByName('id').AsInteger := pacID;
     SQLQueryDeleteCekarna.ExecSQL;
 
+    Pacient.SQLTransaction1.CommitRetaining;
+
     // 2) Obnovení hlavního datasetu, aby pacient zmizel z DBGridu
     Pacient.SQLQueryCekarna.Close;
     Pacient.SQLQueryCekarna.Open;

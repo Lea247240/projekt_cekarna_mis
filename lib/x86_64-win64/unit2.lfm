@@ -1,7 +1,7 @@
 object Sestra: TSestra
-  Left = 1147
+  Left = 1350
   Height = 1129
-  Top = 200
+  Top = 222
   Width = 1107
   Caption = 'Sestra'
   ClientHeight = 1129
