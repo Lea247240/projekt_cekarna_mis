@@ -1,11 +1,11 @@
 object Sestra: TSestra
-  Left = 1456
+  Left = 1147
   Height = 1129
-  Top = 231
-  Width = 1069
+  Top = 200
+  Width = 1107
   Caption = 'Sestra'
   ClientHeight = 1129
-  ClientWidth = 1069
+  ClientWidth = 1107
   Color = 16766969
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
@@ -30,6 +30,25 @@ object Sestra: TSestra
     DataSource = DataSourceVykon2
     TabOrder = 1
   end
+  object Button1: TButton
+    Left = 656
+    Height = 38
+    Top = 210
+    Width = 193
+    Caption = 'Zavolat pacienta'
+    TabOrder = 2
+    OnClick = ZavolatPacienta
+  end
+  object Vysetrovny: TDBLookupComboBox
+    Left = 680
+    Height = 33
+    Top = 272
+    Width = 150
+    DataSource = DataSourceVysetrovna
+    ListFieldIndex = 0
+    LookupCache = False
+    TabOrder = 3
+  end
   object SQLQueryVykon2: TSQLQuery
     FieldDefs = <>
     Database = Pacient.SQLite3Connection1
@@ -52,5 +71,23 @@ object Sestra: TSestra
     DataSet = SQLQueryVykon2
     Left = 592
     Top = 568
+  end
+  object SQLQueryVysetrovna: TSQLQuery
+    FieldDefs = <>
+    Database = Pacient.SQLite3Connection1
+    Transaction = Pacient.SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM CiselnikVysetrovna ORDER BY Cislo'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 159
+    Top = 876
+  end
+  object DataSourceVysetrovna: TDataSource
+    DataSet = SQLQueryVysetrovna
+    Left = 384
+    Top = 872
   end
 end

@@ -1,11 +1,11 @@
 object Pacient: TPacient
-  Left = 308
+  Left = 370
   Height = 1150
-  Top = 217
-  Width = 1129
+  Top = 222
+  Width = 982
   Caption = 'Pacient'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 1150
+  ClientWidth = 982
   Color = 16707548
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'

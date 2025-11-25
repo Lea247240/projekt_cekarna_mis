@@ -5,18 +5,24 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, SQLDB, DB, Forms, Controls, Graphics, Dialogs, DBGrids;
+  Classes, SysUtils, SQLDB, DB, Forms, Controls, Graphics, Dialogs, DBGrids,
+  StdCtrls;
 
 type
 
   { TSestra }
 
   TSestra = class(TForm)
-    DataSourceVykon: TDataSource;
+    Button1: TButton;
+    Vysetrovny: TComboBox;
+    DataSourceVysetrovna: TDataSource;
+    DataSourceVykon2: TDataSource;
     DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
-    SQLQueryVykon: TSQLQuery;
+    SQLQueryVysetrovna: TSQLQuery;
+    SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
+    procedure ZavolatPacienta(Sender: TObject);
 
   private
 
@@ -40,8 +46,28 @@ procedure TSestra.FormCreate(Sender: TObject);
    begin
 
   // Načtení výkonu
-  SQLQueryVykon.Open;
+  SQLQueryVykon2.Open;
+  SQLQueryVysetrovna.Open;
 end;
 
-end.
+procedure TSestra.ZavolatPacienta(Sender: TObject);
+    var
+      jmenoPacienta: string;
+    begin
+      // Nejprve kontrola, zda je pacient vybrán
+      if (not Pacient.DataSourceCekarna.DataSet.Active)
+         or (Pacient.DataSourceCekarna.DataSet.IsEmpty) then
+      begin
+        ShowMessage('Není vybrán žádný pacient!');
+        Exit;
+      end;
+
+      // Toto se provede jen pokud pacient vybrán je
+      jmenoPacienta :=
+        Pacient.DataSourceCekarna.DataSet.FieldByName('Jmeno').AsString;
+
+      ShowMessage('Vybrán pacient: ' + jmenoPacienta);
+    end;
+
+    end.
 

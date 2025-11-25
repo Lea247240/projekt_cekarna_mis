@@ -1,11 +1,11 @@
 object Pacient: TPacient
-  Left = 308
+  Left = 370
   Height = 1150
-  Top = 217
-  Width = 1129
+  Top = 222
+  Width = 998
   Caption = 'Pacient'
   ClientHeight = 1150
-  ClientWidth = 1129
+  ClientWidth = 998
   Color = 16707548
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
@@ -65,9 +65,9 @@ object Pacient: TPacient
     Caption = 'LabelInfo'
   end
   object Button1: TButton
-    Left = 976
+    Left = 504
     Height = 38
-    Top = 40
+    Top = 304
     Width = 169
     Caption = 'Sesterske okno'
     TabOrder = 5
