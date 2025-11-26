@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, SQLite3Conn, SQLDB, DB, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, DBGrids;
+  StdCtrls, DBGrids, ExtCtrls;
 
 type
 
@@ -14,6 +14,7 @@ type
 
   TPacient = class(TForm)
     Button1: TButton;
+    LabelDalsi: TLabel;
     LabelInfo: TLabel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
@@ -37,6 +38,7 @@ type
   private
 
   public
+    procedure NastavitDalsiNaRade(const s: string);
 
   end;
 
@@ -62,11 +64,6 @@ begin
 
   // Načtení výkonu
   SQLQueryVykon.Open;
-
-
-  SQLQueryCekarna.RequestLive := True;
-  SQLQueryCekarna.ReadOnly := False;
-
 
   SQLQueryCekarna.Open;
 
@@ -153,6 +150,12 @@ begin
   PotvrdHeslo.Visible := True;
   EditHeslo.SetFocus;
   LabelInfo.Caption := ''; // vyčistí případnou starou zprávu
+end;
+
+
+procedure TPacient.NastavitDalsiNaRade(const text: string);
+begin
+  LabelDalsi.Caption := s;
 end;
 
 

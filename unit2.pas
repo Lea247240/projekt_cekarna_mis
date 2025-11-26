@@ -63,6 +63,7 @@ var
   cisloVysetrovny: string;
   odpoved: Integer;
   pacID: Integer;
+  cisloFronty: Integer;
 begin
   if (not Pacient.DataSourceCekarna.DataSet.Active) or (Pacient.DataSourceCekarna.DataSet.IsEmpty) then
   begin
@@ -80,6 +81,7 @@ begin
   cisloVysetrovny := DBLookupComboBox1.Text;
 
   pacID := Pacient.DataSourceCekarna.DataSet.FieldByName('PacientID').AsInteger;
+  cisloFronty := Pacient.DataSourceCekarna.DataSet.FieldByName('Poradi').AsInteger;
 
 
   odpoved := MessageDlg(
@@ -102,6 +104,8 @@ begin
     // 2) Obnovení hlavního datasetu, aby pacient zmizel z DBGridu
     Pacient.SQLQueryCekarna.Close;
     Pacient.SQLQueryCekarna.Open;
+
+    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + ' do vyšetřovny ' + cisloVysetrovny);
 
     // 3) Hlaska
     ShowMessage('Pacient ' + jmenoPacienta + ' byl vyzván do vyšetřovny ' + cisloVysetrovny + '.');

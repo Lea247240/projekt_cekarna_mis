@@ -1,11 +1,11 @@
 object Pacient: TPacient
-  Left = 370
+  Left = 334
   Height = 1150
-  Top = 222
+  Top = 202
   Width = 998
   Caption = 'Pacient'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 1150
+  ClientWidth = 998
   Color = 16707548
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
@@ -72,6 +72,14 @@ object Pacient: TPacient
     Caption = 'Sesterske okno'
     TabOrder = 5
     OnClick = OtevriSestru
+  end
+  object LabelDalsi: TLabel
+    Left = 520
+    Height = 1
+    Top = 85
+    Width = 1
+    Color = clWhite
+    ParentColor = False
   end
   object SQLite3Connection1: TSQLite3Connection
     Connected = False
