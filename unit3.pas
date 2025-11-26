@@ -5,10 +5,15 @@ unit Unit3;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, DBGrids;
 
 type
+
+  { TObjednaniPacienti }
+
   TObjednaniPacienti = class(TForm)
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
   private
 
   public

@@ -1,0 +1,7 @@
+- s/p
+- hlavní menu a pop menu
+- vizualizace
+- enter na ok
+- hvězdičky místo okna
+- labelinfo jen pořadové číslo
+- aby se ukazovaly jen sloupce co chceme

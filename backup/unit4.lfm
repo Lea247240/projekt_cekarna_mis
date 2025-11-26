@@ -1,0 +1,23 @@
+object Vysetrovny: TVysetrovny
+  Left = 972
+  Height = 868
+  Top = 320
+  Width = 1290
+  Caption = 'Vysetrovny'
+  ClientHeight = 868
+  ClientWidth = 1290
+  Color = 16759773
+  DesignTimePPI = 144
+  LCLVersion = '4.4.0.0'
+  object DBGrid1: TDBGrid
+    Left = 120
+    Height = 272
+    Top = 152
+    Width = 896
+    Color = clWindow
+    Columns = <>
+    DataSource = Sestra.DataSourceVysetrovna
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 0
+  end
+end

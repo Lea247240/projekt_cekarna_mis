@@ -24,8 +24,6 @@ type
     DataSourceCekarna: TDataSource;
     DataSourceVykon: TDataSource;
     DataSourcePacient: TDataSource;
-    DBGrid1: TDBGrid;
-    DBGrid2: TDBGrid;
     SQLite3Connection1: TSQLite3Connection;
     SQLQueryCekarna: TSQLQuery;
     SQLQueryVykon: TSQLQuery;
@@ -44,6 +42,7 @@ type
 
 var
   Pacient: TPacient;
+  PosledniPoradi: Integer = 0;
 
 implementation
     uses
@@ -66,6 +65,13 @@ begin
   SQLQueryVykon.Open;
 
   SQLQueryCekarna.Open;
+
+  // Načtení posledního použitého pořadí
+  SQLQueryCekarna.Last; // nebo SQL dotaz: SELECT MAX(Poradi) AS MaxPoradi FROM Cekarna;
+  if not SQLQueryCekarna.IsEmpty then
+    PosledniPoradi := SQLQueryCekarna.FieldByName('Poradi').AsInteger
+  else
+    PosledniPoradi := 0;
 
 
 
@@ -112,17 +118,12 @@ begin
   jmeno := SQLQueryHeslo.FieldByName('Jmeno').AsString;
 
 
+  PosledniPoradi := PosledniPoradi + 1;
+  dalsiPoradi := PosledniPoradi;
 
   // Výpočet pořadí pomocí SQLQueryCekarnaInsert
   SQLQueryCekarnaInsert.Close;
-  SQLQueryCekarnaInsert.SQL.Text :=
-    'SELECT COALESCE(MAX(Poradi), 0) + 1 AS dalsiPoradi FROM Cekarna';
-  SQLQueryCekarnaInsert.Open;
 
-  dalsiPoradi := SQLQueryCekarnaInsert.FieldByName('dalsiPoradi').AsInteger;
-
-  // INSERT pacienta do čekárny – opět přes SQLQueryCekarnaInsert
-  SQLQueryCekarnaInsert.Close;
   SQLQueryCekarnaInsert.SQL.Text :=
     'INSERT INTO Cekarna (PacientID, Jmeno, Poradi) ' +
     'VALUES (:pid, :jmeno, :poradi)';
@@ -130,6 +131,8 @@ begin
   SQLQueryCekarnaInsert.ParamByName('jmeno').AsString := jmeno;
   SQLQueryCekarnaInsert.ParamByName('poradi').AsInteger := dalsiPoradi;
   SQLQueryCekarnaInsert.ExecSQL;
+
+
 
   SQLTransaction1.CommitRetaining;
 

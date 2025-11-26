@@ -1,7 +1,7 @@
 object ObjednaniPacienti: TObjednaniPacienti
-  Left = 732
+  Left = 1047
   Height = 876
-  Top = 363
+  Top = 288
   Width = 1160
   Caption = 'ObjednaniPacienti'
   Color = 11206570

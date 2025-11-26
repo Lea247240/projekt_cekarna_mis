@@ -30,7 +30,9 @@ type
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
+    procedure NovyDen(Sender: TObject);
     procedure UkazatObjednane(Sender: TObject);
+    procedure UkazatVysetrovny(Sender: TObject);
     procedure ZavolatPacienta(Sender: TObject);
 
   private
@@ -43,7 +45,7 @@ var
   Sestra: TSestra;
 
 implementation
-    uses Unit1, Unit3;
+    uses Unit1, Unit3, Unit4;
 {$R *.lfm}
 
 
@@ -65,12 +67,36 @@ procedure TSestra.FormCreate(Sender: TObject);
   DBLookupComboBox1.KeyField := 'VysetrovnaID';
 end;
 
+procedure TSestra.NovyDen(Sender: TObject);
+begin
+  // vymazání čekárny
+  SQLQueryDeleteCekarna.Close;
+  SQLQueryDeleteCekarna.SQL.Text := 'DELETE FROM Cekarna';
+  SQLQueryDeleteCekarna.ExecSQL;
+  Pacient.SQLTransaction1.CommitRetaining;
+
+  // zavření a znovuotevření datasetů
+  SQLQueryVysetrovna.Close;
+  SQLQueryVykon2.Close;
+  SQLQueryVysetrovna.Open;
+  SQLQueryVykon2.Open;
+
+  Pacient.SQLQueryCekarna.Close;
+  Pacient.SQLQueryCekarna.Open;
+
+end;
+
 procedure TSestra.UkazatObjednane(Sender: TObject);
 begin
   ObjednaniPacienti := TObjednaniPacienti.Create(Self);
   ObjednaniPacienti.Show;  // nebo ShowModal pro modální okno
 end;
 
+procedure TSestra.UkazatVysetrovny(Sender: TObject);
+begin
+  Vysetrovny := TVysetrovny.Create(Self);
+  Vysetrovny.Show;  // nebo ShowModal pro modální okno
+end;
 
 
 procedure TSestra.ZavolatPacienta(Sender: TObject);

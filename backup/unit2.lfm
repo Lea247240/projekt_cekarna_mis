@@ -110,15 +110,16 @@ object Sestra: TSestra
     end
     object MenuItem2: TMenuItem
       Caption = 'Vyšetřovy'
+      OnClick = UkazatVysetrovny
     end
     object MenuItem3: TMenuItem
       Caption = 'Nový den'
+      OnClick = NovyDen
     end
     object MenuItem4: TMenuItem
       Caption = 'Informace o aplikaci'
       object MenuItem5: TMenuItem
         Caption = 'Nápověda'
-        OnClick = MenuItem5Click
       end
       object MenuItem6: TMenuItem
         Caption = 'Autoři'

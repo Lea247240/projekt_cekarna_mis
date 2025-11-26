@@ -1,10 +1,34 @@
 object ObjednaniPacienti: TObjednaniPacienti
-  Left = 1047
+  Left = 565
   Height = 876
-  Top = 288
-  Width = 1160
+  Top = 304
+  Width = 1671
   Caption = 'ObjednaniPacienti'
+  ClientHeight = 876
+  ClientWidth = 1671
   Color = 11206570
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
+  object DBGrid1: TDBGrid
+    Left = 56
+    Height = 326
+    Top = 216
+    Width = 648
+    Color = clWindow
+    Columns = <>
+    DataSource = Pacient.DataSourcePacient
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 0
+  end
+  object DBGrid2: TDBGrid
+    Left = 784
+    Height = 321
+    Top = 216
+    Width = 568
+    Color = clWindow
+    Columns = <>
+    DataSource = Pacient.DataSourceVykon
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 1
+  end
 end

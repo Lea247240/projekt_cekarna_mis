@@ -24,8 +24,6 @@ type
     DataSourceCekarna: TDataSource;
     DataSourceVykon: TDataSource;
     DataSourcePacient: TDataSource;
-    DBGrid1: TDBGrid;
-    DBGrid2: TDBGrid;
     SQLite3Connection1: TSQLite3Connection;
     SQLQueryCekarna: TSQLQuery;
     SQLQueryVykon: TSQLQuery;
