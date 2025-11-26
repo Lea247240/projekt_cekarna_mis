@@ -30,8 +30,7 @@ type
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
-    procedure MenuItem1Click(Sender: TObject);
-    procedure MenuItem5Click(Sender: TObject);
+    procedure UkazatObjednane(Sender: TObject);
     procedure ZavolatPacienta(Sender: TObject);
 
   private
@@ -44,7 +43,7 @@ var
   Sestra: TSestra;
 
 implementation
-    uses Unit1;
+    uses Unit1, Unit3;
 {$R *.lfm}
 
 
@@ -66,15 +65,13 @@ procedure TSestra.FormCreate(Sender: TObject);
   DBLookupComboBox1.KeyField := 'VysetrovnaID';
 end;
 
-procedure TSestra.MenuItem1Click(Sender: TObject);
+procedure TSestra.UkazatObjednane(Sender: TObject);
 begin
-
+  ObjednaniPacienti := TObjednaniPacienti.Create(Self);
+  ObjednaniPacienti.Show;  // nebo ShowModal pro modální okno
 end;
 
-procedure TSestra.MenuItem5Click(Sender: TObject);
-begin
 
-end;
 
 procedure TSestra.ZavolatPacienta(Sender: TObject);
 var

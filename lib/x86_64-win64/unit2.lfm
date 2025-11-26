@@ -30,6 +30,7 @@ object Sestra: TSestra
     Color = clWindow
     Columns = <>
     DataSource = DataSourceVykon2
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 1
   end
   object Button1: TButton
@@ -105,7 +106,7 @@ object Sestra: TSestra
     Top = 16
     object MenuItem1: TMenuItem
       Caption = 'Objednaní pacienti'
-      OnClick = MenuItem1Click
+      OnClick = UkazatObjednane
     end
     object MenuItem2: TMenuItem
       Caption = 'Vyšetřovy'
@@ -117,7 +118,6 @@ object Sestra: TSestra
       Caption = 'Informace o aplikaci'
       object MenuItem5: TMenuItem
         Caption = 'Nápověda'
-        OnClick = MenuItem5Click
       end
       object MenuItem6: TMenuItem
         Caption = 'Autoři'

@@ -153,7 +153,7 @@ begin
 end;
 
 
-procedure TPacient.NastavitDalsiNaRade(const text: string);
+procedure TPacient.NastavitDalsiNaRade(const s: string);
 begin
   LabelDalsi.Caption := s;
 end;

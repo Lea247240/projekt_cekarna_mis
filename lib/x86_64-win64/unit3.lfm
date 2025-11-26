@@ -1,0 +1,10 @@
+object ObjednaniPacienti: TObjednaniPacienti
+  Left = 1047
+  Height = 876
+  Top = 288
+  Width = 1160
+  Caption = 'ObjednaniPacienti'
+  Color = 11206570
+  DesignTimePPI = 144
+  LCLVersion = '4.4.0.0'
+end
