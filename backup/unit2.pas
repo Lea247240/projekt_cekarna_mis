@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, SQLDB, DB, Forms, Controls, Graphics, Dialogs, DBGrids,
-  StdCtrls, DBCtrls;
+  StdCtrls, DBCtrls, Menus;
 
 type
 
@@ -19,10 +19,19 @@ type
     DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
     DBLookupComboBox1: TDBLookupComboBox;
+    MainMenu1: TMainMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
     SQLQueryDeleteCekarna: TSQLQuery;
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem5Click(Sender: TObject);
     procedure ZavolatPacienta(Sender: TObject);
 
   private
@@ -55,6 +64,16 @@ procedure TSestra.FormCreate(Sender: TObject);
   DBLookupComboBox1.ListSource := DataSourceVysetrovna;
   DBLookupComboBox1.ListField := 'Cislo';
   DBLookupComboBox1.KeyField := 'VysetrovnaID';
+end;
+
+procedure TSestra.MenuItem1Click(Sender: TObject);
+begin
+
+end;
+
+procedure TSestra.MenuItem5Click(Sender: TObject);
+begin
+
 end;
 
 procedure TSestra.ZavolatPacienta(Sender: TObject);
@@ -105,7 +124,7 @@ begin
     Pacient.SQLQueryCekarna.Close;
     Pacient.SQLQueryCekarna.Open;
 
-    Pacient.NastavitDalsiNaRade('Další na řadě: ' + cisloFronty + ' do vyšetřovny ' + cisloVysetrovny);
+    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + ' do vyšetřovny ' + cisloVysetrovny);
 
     // 3) Hlaska
     ShowMessage('Pacient ' + jmenoPacienta + ' byl vyzván do vyšetřovny ' + cisloVysetrovny + '.');
