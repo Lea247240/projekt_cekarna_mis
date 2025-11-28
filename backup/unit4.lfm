@@ -1,18 +1,18 @@
 object Vysetrovny: TVysetrovny
-  Left = 632
-  Height = 959
-  Top = 361
-  Width = 1330
+  Left = 784
+  Height = 725
+  Top = 394
+  Width = 944
   Caption = 'Vysetrovny'
-  ClientHeight = 959
-  ClientWidth = 1330
+  ClientHeight = 725
+  ClientWidth = 944
   Color = 16759773
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
   object DBGrid1: TDBGrid
-    Left = 424
-    Height = 360
-    Top = 248
+    Left = 224
+    Height = 344
+    Top = 168
     Width = 504
     Color = clWhite
     Columns = <    

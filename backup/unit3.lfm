@@ -2,10 +2,10 @@ object ObjednaniPacienti: TObjednaniPacienti
   Left = 565
   Height = 876
   Top = 304
-  Width = 1493
+  Width = 1449
   Caption = 'ObjednaniPacienti'
   ClientHeight = 876
-  ClientWidth = 1493
+  ClientWidth = 1449
   Color = 11206570
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
@@ -47,7 +47,7 @@ object ObjednaniPacienti: TObjednaniPacienti
     Left = 952
     Height = 321
     Top = 296
-    Width = 376
+    Width = 352
     Color = clWindow
     Columns = <    
       item

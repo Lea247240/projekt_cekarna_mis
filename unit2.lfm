@@ -1,24 +1,25 @@
 object Sestra: TSestra
-  Left = 1350
+  Left = 526
   Height = 1099
-  Top = 222
-  Width = 1107
+  Top = 138
+  Width = 1725
   Caption = 'Sestra'
-  ClientHeight = 1099
-  ClientWidth = 1107
-  Color = 16766969
+  ClientHeight = 0
+  ClientWidth = 0
+  Color = 16769503
   DesignTimePPI = 144
   KeyPreview = True
   Menu = MainMenu1
+  PopupMode = pmExplicit
   LCLVersion = '4.4.0.0'
   WindowState = wsFullScreen
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnMouseDown = FormMouseDown
   object DBGrid3: TDBGrid
-    Left = 40
+    Left = 736
     Height = 304
-    Top = 80
+    Top = 448
     Width = 480
     Color = clWindow
     Columns = <>
@@ -29,9 +30,9 @@ object Sestra: TSestra
     TabOrder = 0
   end
   object DBGrid2: TDBGrid
-    Left = 40
+    Left = 1384
     Height = 257
-    Top = 408
+    Top = 464
     Width = 416
     Color = clWindow
     Columns = <    
@@ -48,22 +49,46 @@ object Sestra: TSestra
     TabOrder = 1
   end
   object Button1: TButton
-    Left = 656
-    Height = 38
-    Top = 208
-    Width = 193
+    Left = 1144
+    Height = 64
+    Top = 824
+    Width = 316
+    AutoSize = True
     Caption = 'Zavolat pacienta'
+    Font.Height = -40
+    ParentFont = False
     TabOrder = 2
     OnClick = ZavolatPacienta
   end
   object DBLookupComboBox1: TDBLookupComboBox
-    Left = 680
-    Height = 33
-    Top = 264
+    Left = 1232
+    Height = 49
+    Top = 1000
     Width = 150
+    Font.Height = -30
     ListFieldIndex = 0
     LookupCache = False
+    ParentFont = False
     TabOrder = 3
+  end
+  object Label1: TLabel
+    Left = 1192
+    Height = 41
+    Top = 944
+    Width = 221
+    Caption = 'Číslo vyšetřovny:'
+    Font.Height = -30
+    ParentFont = False
+  end
+  object ButtonPacient: TButton
+    Left = 2376
+    Height = 35
+    Top = 24
+    Width = 154
+    AutoSize = True
+    Caption = 'Pacientske okno'
+    TabOrder = 4
+    OnClick = ButtonPacientClick
   end
   object SQLQueryVykon2: TSQLQuery
     FieldDefs = <>
@@ -80,13 +105,13 @@ object Sestra: TSestra
       end>
     Macros = <>
     DataSource = Pacient.DataSourceCekarna
-    Left = 592
-    Top = 464
+    Left = 352
+    Top = 1032
   end
   object DataSourceVykon2: TDataSource
     DataSet = SQLQueryVykon2
-    Left = 592
-    Top = 568
+    Left = 352
+    Top = 1136
   end
   object SQLQueryVysetrovna: TSQLQuery
     FieldDefs = <>
@@ -148,8 +173,8 @@ object Sestra: TSestra
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 838
-    Top = 575
+    Left = 598
+    Top = 1143
     object MenuItem7: TMenuItem
       Caption = 'Objednaní pacienti'
       ShortCut = 16463

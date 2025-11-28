@@ -6,7 +6,7 @@ object Vysetrovny: TVysetrovny
   Caption = 'Vysetrovny'
   ClientHeight = 725
   ClientWidth = 944
-  Color = 16759773
+  Color = 16769503
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
   object DBGrid1: TDBGrid
@@ -18,12 +18,12 @@ object Vysetrovny: TVysetrovny
     Columns = <    
       item
         Title.Caption = 'Cislo'
-        Width = 57
+        Width = 79
         FieldName = 'Cislo'
       end    
       item
         Title.Caption = 'Doktor'
-        Width = 77
+        Width = 107
         FieldName = 'Doktor'
       end>
     DataSource = Sestra.DataSourceVysetrovna

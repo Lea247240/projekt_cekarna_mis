@@ -14,11 +14,13 @@ type
 
   TSestra = class(TForm)
     Button1: TButton;
+    ButtonPacient: TButton;
     DataSourceVysetrovna: TDataSource;
     DataSourceVykon2: TDataSource;
     DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
     DBLookupComboBox1: TDBLookupComboBox;
+    Label1: TLabel;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
     MenuItem10: TMenuItem;
@@ -37,6 +39,7 @@ type
     SQLQueryDeleteCekarna: TSQLQuery;
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
+    procedure ButtonPacientClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
@@ -75,6 +78,12 @@ procedure TSestra.FormCreate(Sender: TObject);
   DBLookupComboBox1.ListSource := DataSourceVysetrovna;
   DBLookupComboBox1.ListField := 'Cislo';
   DBLookupComboBox1.KeyField := 'VysetrovnaID';
+end;
+
+procedure TSestra.ButtonPacientClick(Sender: TObject);
+begin
+   Hide;
+    Pacient.ZobrazOkno;
 end;
 
 
@@ -160,8 +169,8 @@ begin
   Pacient.LabelDalsi.Caption := '';
   Pacient.LabelRada.Caption := '';
 
-  Image1.Visible := False;
-  Image2.Visible := False;
+  Pacient.Image1.Visible := False;
+  Pacient.Image2.Visible := False;
 
 
   end;

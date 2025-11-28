@@ -15,6 +15,10 @@ type
   TPacient = class(TForm)
     Button1: TButton;
     Image1: TImage;
+    Image2: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     LabelDalsi: TLabel;
     LabelRada: TLabel;
     LabelInfo: TLabel;
@@ -83,6 +87,10 @@ begin
     PosledniPoradi := 0;
 
 
+
+
+
+
 end;
 
 
@@ -103,8 +111,10 @@ end;
 
 procedure TPacient.FormShow(Sender: TObject);
 begin
-  Sestra.Show;
+  //Sestra.Show;
+
 end;
+
 
 
 procedure TPacient.FormKeyDown(Sender: TObject; var Key: Word;
@@ -134,6 +144,7 @@ begin
   begin
     LabelRada.Caption := 'Zadejte heslo!';
     Image1.Visible := False;
+    Image2.Visible := True;
     Exit;
   end;
 
@@ -148,6 +159,7 @@ begin
   begin
     LabelRada.Caption := 'Nesprávné heslo!';
     Image1.Visible := False;
+    Image2.Visible := True;
     Exit;
   end;
 
@@ -180,6 +192,7 @@ begin
 
   LabelRada.Caption :=  'Vaše pořadové číslo je: ' + IntToStr(dalsiPoradi);
   EditHeslo.Text := '';
+  Image2.Visible := False;
   Image1.Visible := True;
 
 
@@ -191,6 +204,7 @@ procedure TPacient.ZadejHesloButtonClick(Sender: TObject);
 begin
   EditHeslo.Visible := True;
   PotvrdHeslo.Visible := True;
+  Label3.Visible := True;
   EditHeslo.SetFocus;
   LabelRada.Caption := ''; // vyčistí případnou starou zprávu
 end;
