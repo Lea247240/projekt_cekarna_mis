@@ -14,9 +14,11 @@ type
 
   TPacient = class(TForm)
     Button1: TButton;
+    Image1: TImage;
     LabelDalsi: TLabel;
     LabelRada: TLabel;
     LabelInfo: TLabel;
+    Panel1: TPanel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
     SQLQueryCekarnaInsert: TSQLQuery;
@@ -81,7 +83,6 @@ begin
     PosledniPoradi := 0;
 
 
-
 end;
 
 
@@ -104,6 +105,7 @@ procedure TPacient.FormShow(Sender: TObject);
 begin
   Sestra.Show;
 end;
+
 
 procedure TPacient.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
@@ -131,6 +133,7 @@ begin
   if heslo = '' then
   begin
     LabelRada.Caption := 'Zadejte heslo!';
+    Image1.Visible := False;
     Exit;
   end;
 
@@ -144,6 +147,7 @@ begin
   if SQLQueryHeslo.IsEmpty then
   begin
     LabelRada.Caption := 'Nesprávné heslo!';
+    Image1.Visible := False;
     Exit;
   end;
 
@@ -176,6 +180,7 @@ begin
 
   LabelRada.Caption :=  'Vaše pořadové číslo je: ' + IntToStr(dalsiPoradi);
   EditHeslo.Text := '';
+  Image1.Visible := True;
 
 
 end;

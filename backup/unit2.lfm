@@ -1,7 +1,7 @@
 object Sestra: TSestra
-  Left = 1280
+  Left = 1350
   Height = 1099
-  Top = 194
+  Top = 222
   Width = 1107
   Caption = 'Sestra'
   ClientHeight = 1099
@@ -11,6 +11,7 @@ object Sestra: TSestra
   KeyPreview = True
   Menu = MainMenu1
   LCLVersion = '4.4.0.0'
+  WindowState = wsFullScreen
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnMouseDown = FormMouseDown
@@ -179,6 +180,7 @@ object Sestra: TSestra
       object MenuItem12: TMenuItem
         Caption = 'Autoři'
         ShortCut = 16449
+        OnClick = UkazatAutory
       end
     end
   end

@@ -43,7 +43,6 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure UkazatAutory(Sender: TObject);
     procedure UkazatNapovedu(Sender: TObject);
-    procedure MenuItem7Click(Sender: TObject);
     procedure NovyDen(Sender: TObject);
     procedure UkazatObjednane(Sender: TObject);
     procedure UkazatVysetrovny(Sender: TObject);
@@ -128,10 +127,6 @@ begin
   OpenDocument('napoveda.txt');
 end;
 
-procedure TSestra.MenuItem7Click(Sender: TObject);
-begin
-
-end;
 
 procedure TSestra.NovyDen(Sender: TObject);
 var
@@ -161,6 +156,14 @@ begin
   Pacient.SQLQueryCekarna.Close;
   Pacient.SQLQueryCekarna.Open;
   PosledniPoradi := 0;
+
+  Pacient.LabelDalsi.Caption := '';
+  Pacient.LabelRada.Caption := '';
+
+  Image1.Visible := False;
+  Image2.Visible := False;
+
+
   end;
 
 end;
@@ -226,7 +229,7 @@ begin
     Pacient.SQLQueryCekarna.Close;
     Pacient.SQLQueryCekarna.Open;
 
-    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + ' do vyšetřovny číslo ' + cisloVysetrovny);
+    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + LineEnding + 'do vyšetřovny číslo ' + cisloVysetrovny);
 
     // 3) Hlaska
     ShowMessage('Pacient ' + jmenoPacienta + ' byl vyzván do vyšetřovny ' + cisloVysetrovny + '.');
