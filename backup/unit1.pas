@@ -15,6 +15,7 @@ type
   TPacient = class(TForm)
     Button1: TButton;
     LabelDalsi: TLabel;
+    LabelRada: TLabel;
     LabelInfo: TLabel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
@@ -29,19 +30,24 @@ type
     SQLQueryVykon: TSQLQuery;
     SQLQueryPacient: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
     procedure OtevriSestru(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
+
   private
 
   public
     procedure NastavitDalsiNaRade(const s: string);
+    procedure ZobrazOkno;
 
   end;
 
 var
   Pacient: TPacient;
+  PosledniPoradi: Integer = 0;
 
 implementation
     uses
@@ -54,6 +60,8 @@ implementation
 
 procedure TPacient.FormCreate(Sender: TObject);
 begin
+
+  //Sestra.Show;
   // Připojení k databázi
   SQLite3Connection1.Connected := True;
 
@@ -65,13 +73,47 @@ begin
 
   SQLQueryCekarna.Open;
 
+  // Načtení posledního použitého pořadí
+  SQLQueryCekarna.Last; // nebo SQL dotaz: SELECT MAX(Poradi) AS MaxPoradi FROM Cekarna;
+  if not SQLQueryCekarna.IsEmpty then
+    PosledniPoradi := SQLQueryCekarna.FieldByName('Poradi').AsInteger
+  else
+    PosledniPoradi := 0;
 
 
+
+end;
+
+
+procedure TPacient.ZobrazOkno;
+begin
+  if WindowState = wsMinimized then
+    WindowState := wsNormal;
+
+  Show;
+  BringToFront;
+  SetFocus;
 end;
 
 procedure TPacient.OtevriSestru(Sender: TObject);
 begin
    Sestra.Show;
+end;
+
+procedure TPacient.FormShow(Sender: TObject);
+begin
+  Sestra.Show;
+end;
+
+procedure TPacient.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+
+  if (ssCtrl in Shift) and (Key = Ord('S')) then
+  begin
+    Sestra.ZobrazOkno;
+    Key := 0;
+  end;
 end;
 
 
@@ -88,7 +130,7 @@ begin
   // Pokud člověk nic nezadá
   if heslo = '' then
   begin
-    LabelInfo.Caption := 'Zadejte heslo!';
+    LabelRada.Caption := 'Zadejte heslo!';
     Exit;
   end;
 
@@ -101,7 +143,7 @@ begin
   // Pokud zadá špatně
   if SQLQueryHeslo.IsEmpty then
   begin
-    LabelInfo.Caption := 'Nesprávné heslo!';
+    LabelRada.Caption := 'Nesprávné heslo!';
     Exit;
   end;
 
@@ -110,17 +152,12 @@ begin
   jmeno := SQLQueryHeslo.FieldByName('Jmeno').AsString;
 
 
+  PosledniPoradi := PosledniPoradi + 1;
+  dalsiPoradi := PosledniPoradi;
 
   // Výpočet pořadí pomocí SQLQueryCekarnaInsert
   SQLQueryCekarnaInsert.Close;
-  SQLQueryCekarnaInsert.SQL.Text :=
-    'SELECT COALESCE(MAX(Poradi), 0) + 1 AS dalsiPoradi FROM Cekarna';
-  SQLQueryCekarnaInsert.Open;
 
-  dalsiPoradi := SQLQueryCekarnaInsert.FieldByName('dalsiPoradi').AsInteger;
-
-  // INSERT pacienta do čekárny – opět přes SQLQueryCekarnaInsert
-  SQLQueryCekarnaInsert.Close;
   SQLQueryCekarnaInsert.SQL.Text :=
     'INSERT INTO Cekarna (PacientID, Jmeno, Poradi) ' +
     'VALUES (:pid, :jmeno, :poradi)';
@@ -129,13 +166,15 @@ begin
   SQLQueryCekarnaInsert.ParamByName('poradi').AsInteger := dalsiPoradi;
   SQLQueryCekarnaInsert.ExecSQL;
 
+
+
   SQLTransaction1.CommitRetaining;
 
   // Znovu načteme čekárnu pro zobrazení
   SQLQueryCekarna.Close;
   SQLQueryCekarna.Open;
 
-  LabelInfo.Caption := 'Pacient ' + jmeno + ' přidán do čekárny (pořadí ' + IntToStr(dalsiPoradi) + ')';
+  LabelRada.Caption := 'Pacient ' + jmeno + ' přidán do čekárny (pořadí ' + IntToStr(dalsiPoradi) + ')';
 
 
 end;
@@ -147,7 +186,7 @@ begin
   EditHeslo.Visible := True;
   PotvrdHeslo.Visible := True;
   EditHeslo.SetFocus;
-  LabelInfo.Caption := ''; // vyčistí případnou starou zprávu
+  LabelRada.Caption := ''; // vyčistí případnou starou zprávu
 end;
 
 
@@ -155,6 +194,9 @@ procedure TPacient.NastavitDalsiNaRade(const s: string);
 begin
   LabelDalsi.Caption := s;
 end;
+
+
+
 
 
 

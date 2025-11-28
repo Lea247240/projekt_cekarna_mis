@@ -30,15 +30,17 @@ type
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure NovyDen(Sender: TObject);
     procedure UkazatObjednane(Sender: TObject);
     procedure UkazatVysetrovny(Sender: TObject);
     procedure ZavolatPacienta(Sender: TObject);
 
+
   private
 
   public
-
+    procedure ZobrazOkno;
   end;
 
 var
@@ -56,15 +58,33 @@ implementation
 procedure TSestra.FormCreate(Sender: TObject);
    begin
 
-  // Načtení výkonu
-
-
-
   SQLQueryVykon2.Open;
   SQLQueryVysetrovna.Open;
   DBLookupComboBox1.ListSource := DataSourceVysetrovna;
   DBLookupComboBox1.ListField := 'Cislo';
   DBLookupComboBox1.KeyField := 'VysetrovnaID';
+end;
+
+
+procedure TSestra.ZobrazOkno;
+   begin
+     if WindowState = wsMinimized then
+       WindowState := wsNormal;
+
+     Show;
+     BringToFront;
+     SetFocus;
+   end;
+
+procedure TSestra.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if (ssCtrl in Shift) and (Key = Ord('P')) then
+  begin
+    Hide;
+    Pacient.ZobrazOkno;
+    Key := 0;
+  end;
+
 end;
 
 procedure TSestra.NovyDen(Sender: TObject);
@@ -148,7 +168,7 @@ begin
     Pacient.SQLQueryCekarna.Close;
     Pacient.SQLQueryCekarna.Open;
 
-    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + ' do vyšetřovny ' + cisloVysetrovny);
+    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + ' do vyšetřovny číslo ' + cisloVysetrovny);
 
     // 3) Hlaska
     ShowMessage('Pacient ' + jmenoPacienta + ' byl vyzván do vyšetřovny ' + cisloVysetrovny + '.');

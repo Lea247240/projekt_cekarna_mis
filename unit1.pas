@@ -15,6 +15,7 @@ type
   TPacient = class(TForm)
     Button1: TButton;
     LabelDalsi: TLabel;
+    LabelRada: TLabel;
     LabelInfo: TLabel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
@@ -29,14 +30,18 @@ type
     SQLQueryVykon: TSQLQuery;
     SQLQueryPacient: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
     procedure OtevriSestru(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
+
   private
 
   public
     procedure NastavitDalsiNaRade(const s: string);
+    procedure ZobrazOkno;
 
   end;
 
@@ -55,6 +60,8 @@ implementation
 
 procedure TPacient.FormCreate(Sender: TObject);
 begin
+
+  //Sestra.Show;
   // Připojení k databázi
   SQLite3Connection1.Connected := True;
 
@@ -77,9 +84,36 @@ begin
 
 end;
 
+
+procedure TPacient.ZobrazOkno;
+begin
+  if WindowState = wsMinimized then
+    WindowState := wsNormal;
+
+  Show;
+  BringToFront;
+  SetFocus;
+end;
+
 procedure TPacient.OtevriSestru(Sender: TObject);
 begin
    Sestra.Show;
+end;
+
+procedure TPacient.FormShow(Sender: TObject);
+begin
+  Sestra.Show;
+end;
+
+procedure TPacient.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+
+  if (ssCtrl in Shift) and (Key = Ord('S')) then
+  begin
+    Sestra.ZobrazOkno;
+    Key := 0;
+  end;
 end;
 
 
@@ -96,7 +130,7 @@ begin
   // Pokud člověk nic nezadá
   if heslo = '' then
   begin
-    LabelInfo.Caption := 'Zadejte heslo!';
+    LabelRada.Caption := 'Zadejte heslo!';
     Exit;
   end;
 
@@ -109,7 +143,7 @@ begin
   // Pokud zadá špatně
   if SQLQueryHeslo.IsEmpty then
   begin
-    LabelInfo.Caption := 'Nesprávné heslo!';
+    LabelRada.Caption := 'Nesprávné heslo!';
     Exit;
   end;
 
@@ -140,7 +174,7 @@ begin
   SQLQueryCekarna.Close;
   SQLQueryCekarna.Open;
 
-  LabelInfo.Caption := 'Pacient ' + jmeno + ' přidán do čekárny (pořadí ' + IntToStr(dalsiPoradi) + ')';
+  LabelRada.Caption :=  'Vaše pořadové číslo je: ' + IntToStr(dalsiPoradi)
 
 
 end;
@@ -152,7 +186,7 @@ begin
   EditHeslo.Visible := True;
   PotvrdHeslo.Visible := True;
   EditHeslo.SetFocus;
-  LabelInfo.Caption := ''; // vyčistí případnou starou zprávu
+  LabelRada.Caption := ''; // vyčistí případnou starou zprávu
 end;
 
 
@@ -160,6 +194,9 @@ procedure TPacient.NastavitDalsiNaRade(const s: string);
 begin
   LabelDalsi.Caption := s;
 end;
+
+
+
 
 
 

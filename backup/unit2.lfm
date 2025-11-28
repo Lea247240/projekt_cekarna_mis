@@ -8,9 +8,11 @@ object Sestra: TSestra
   ClientWidth = 1107
   Color = 16766969
   DesignTimePPI = 144
+  KeyPreview = True
   Menu = MainMenu1
   LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   object DBGrid3: TDBGrid
     Left = 40
     Height = 304

@@ -60,6 +60,7 @@
         <Filename Value="unit3.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ObjednaniPacienti"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit3"/>
       </Unit>
@@ -67,6 +68,7 @@
         <Filename Value="unit4.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Vysetrovny"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit4"/>
       </Unit>

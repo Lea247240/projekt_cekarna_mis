@@ -1,15 +1,18 @@
 object Pacient: TPacient
-  Left = 334
+  Left = 1325
   Height = 1150
-  Top = 202
+  Top = 230
   Width = 1143
   Caption = 'Pacient'
   ClientHeight = 1150
   ClientWidth = 1143
   Color = 16707548
   DesignTimePPI = 144
+  KeyPreview = True
   LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
   object ZadejHesloButton: TButton
     Left = 279
     Height = 38
@@ -25,7 +28,6 @@ object Pacient: TPacient
     Top = 160
     Width = 256
     TabOrder = 1
-    Text = 'EditHeslo'
     Visible = False
   end
   object PotvrdHeslo: TButton
@@ -34,15 +36,16 @@ object Pacient: TPacient
     Top = 155
     Width = 113
     Caption = 'OK'
+    Default = True
     TabOrder = 2
     OnClick = PotvrdHesloClick
   end
   object LabelInfo: TLabel
-    Left = 544
+    Left = -398
     Height = 25
-    Top = 208
-    Width = 73
-    Caption = 'LabelInfo'
+    Top = -195
+    Width = 65
+    Caption = '             '
   end
   object Button1: TButton
     Left = 504
@@ -53,13 +56,21 @@ object Pacient: TPacient
     TabOrder = 3
     OnClick = OtevriSestru
   end
-  object LabelDalsi: TLabel
-    Left = 520
-    Height = 1
-    Top = 85
-    Width = 1
+  object LabelRada: TLabel
+    Left = 480
+    Height = 25
+    Top = 208
+    Width = 166
+    Caption = 'Toto potom vymazat'
     Color = clWhite
     ParentColor = False
+  end
+  object LabelDalsi: TLabel
+    Left = 484
+    Height = 25
+    Top = 115
+    Width = 96
+    Caption = 'Toto smazat'
   end
   object SQLite3Connection1: TSQLite3Connection
     Connected = False
