@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, SQLDB, DB, Forms, Controls, Graphics, Dialogs, DBGrids,
-  StdCtrls, DBCtrls, Menus;
+  StdCtrls, DBCtrls, Menus, ActnList;
 
 type
 
@@ -21,16 +21,27 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
+    MenuItem10: TMenuItem;
+    MenuItem11: TMenuItem;
+    MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
+    PopupMenu1: TPopupMenu;
     SQLQueryDeleteCekarna: TSQLQuery;
     SQLQueryVysetrovna: TSQLQuery;
     SQLQueryVykon2: TSQLQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure MenuItem7Click(Sender: TObject);
     procedure NovyDen(Sender: TObject);
     procedure UkazatObjednane(Sender: TObject);
     procedure UkazatVysetrovny(Sender: TObject);
@@ -85,10 +96,42 @@ begin
     Key := 0;
   end;
 
+
+if (Shift = [ssCtrl]) and (Key = Ord('Z')) then
+begin
+    ZavolatPacienta(Self);
+    end;
+
+
+end;
+
+procedure TSestra.FormMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+   
+if Button = mbRight then
+    PopupMenu1.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y)
+
+end;
+
+procedure TSestra.MenuItem7Click(Sender: TObject);
+begin
+
 end;
 
 procedure TSestra.NovyDen(Sender: TObject);
+var
+  odpoved: Integer;
 begin
+     odpoved := MessageDlg(
+    'Opravdu si přejete smazat záznamy a zahájit nový den?',
+    mtConfirmation,
+    [mbYes, mbNo],
+    0
+  );
+
+  if odpoved = mrYes then
+  begin
   // vymazání čekárny
   SQLQueryDeleteCekarna.Close;
   SQLQueryDeleteCekarna.SQL.Text := 'DELETE FROM Cekarna';
@@ -104,6 +147,7 @@ begin
   Pacient.SQLQueryCekarna.Close;
   Pacient.SQLQueryCekarna.Open;
   PosledniPoradi := 0;
+  end;
 
 end;
 
@@ -176,7 +220,6 @@ begin
   else
     ShowMessage('Volání pacienta zrušeno.');
 end;
-
 
     end.
 

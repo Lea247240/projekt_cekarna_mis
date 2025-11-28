@@ -13,6 +13,7 @@ object Sestra: TSestra
   LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnMouseDown = FormMouseDown
   object DBGrid3: TDBGrid
     Left = 40
     Height = 304
@@ -21,7 +22,7 @@ object Sestra: TSestra
     Color = clWindow
     Columns = <>
     DataSource = Pacient.DataSourceCekarna
-    Font.Height = -20
+    Font.Height = -24
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
     ParentFont = False
     TabOrder = 0
@@ -35,11 +36,12 @@ object Sestra: TSestra
     Columns = <    
       item
         Title.Caption = 'TypVykonu'
+        Width = 135
         FieldName = 'TypVykonu'
       end>
     DataSource = DataSourceVykon2
-    Font.Height = -20
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Font.Height = -24
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
     OptionsExtra = [dgeCheckboxColumn]
     ParentFont = False
     TabOrder = 1
@@ -47,7 +49,7 @@ object Sestra: TSestra
   object Button1: TButton
     Left = 656
     Height = 38
-    Top = 210
+    Top = 208
     Width = 193
     Caption = 'Zavolat pacienta'
     TabOrder = 2
@@ -117,23 +119,63 @@ object Sestra: TSestra
     Top = 16
     object MenuItem1: TMenuItem
       Caption = 'Objednaní pacienti'
+      ShortCut = 16463
       OnClick = UkazatObjednane
     end
     object MenuItem2: TMenuItem
       Caption = 'Vyšetřovy'
+      ShortCut = 16470
       OnClick = UkazatVysetrovny
     end
     object MenuItem3: TMenuItem
       Caption = 'Nový den'
+      ShortCut = 16462
       OnClick = NovyDen
     end
     object MenuItem4: TMenuItem
       Caption = 'Informace o aplikaci'
       object MenuItem5: TMenuItem
         Caption = 'Nápověda'
+        ShortCut = 16462
       end
       object MenuItem6: TMenuItem
         Caption = 'Autoři'
+        ShortCut = 16449
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 838
+    Top = 575
+    object MenuItem7: TMenuItem
+      Caption = 'Objednaní pacienti'
+      ShortCut = 16463
+      OnClick = UkazatObjednane
+    end
+    object MenuItem8: TMenuItem
+      Caption = 'Vyšetřovny'
+      ShortCut = 16470
+      OnClick = UkazatVysetrovny
+    end
+    object MenuItem9: TMenuItem
+      Caption = 'Nový den'
+      ShortCut = 16462
+      OnClick = NovyDen
+    end
+    object MenuItem13: TMenuItem
+      Caption = 'Zavolat pacienta'
+      ShortCut = 16474
+      OnClick = ZavolatPacienta
+    end
+    object MenuItem10: TMenuItem
+      Caption = 'Informace o aplikaci'
+      object MenuItem11: TMenuItem
+        Caption = 'Nápověda'
+        ShortCut = 16462
+      end
+      object MenuItem12: TMenuItem
+        Caption = 'Autoři'
+        ShortCut = 16449
       end
     end
   end
