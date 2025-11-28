@@ -136,11 +136,13 @@ object Sestra: TSestra
       Caption = 'Informace o aplikaci'
       object MenuItem5: TMenuItem
         Caption = 'Nápověda'
-        ShortCut = 16462
+        ShortCut = 16456
+        OnClick = UkazatNapovedu
       end
       object MenuItem6: TMenuItem
         Caption = 'Autoři'
         ShortCut = 16449
+        OnClick = UkazatAutory
       end
     end
   end
@@ -171,11 +173,13 @@ object Sestra: TSestra
       Caption = 'Informace o aplikaci'
       object MenuItem11: TMenuItem
         Caption = 'Nápověda'
-        ShortCut = 16462
+        ShortCut = 16456
+        OnClick = UkazatNapovedu
       end
       object MenuItem12: TMenuItem
         Caption = 'Autoři'
         ShortCut = 16449
+        OnClick = UkazatAutory
       end
     end
   end

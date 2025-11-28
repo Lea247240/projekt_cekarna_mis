@@ -41,6 +41,8 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure UkazatAutory(Sender: TObject);
+    procedure UkazatNapovedu(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
     procedure NovyDen(Sender: TObject);
     procedure UkazatObjednane(Sender: TObject);
@@ -58,7 +60,7 @@ var
   Sestra: TSestra;
 
 implementation
-    uses Unit1, Unit3, Unit4;
+    uses Unit1, Unit3, Unit4, LCLIntf, Unit5;
 {$R *.lfm}
 
 
@@ -112,6 +114,18 @@ begin
 if Button = mbRight then
     PopupMenu1.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y)
 
+end;
+
+procedure TSestra.UkazatAutory(Sender: TObject);
+begin
+  Autori.ShowModal;
+end;
+
+
+
+procedure TSestra.UkazatNapovedu(Sender: TObject);
+begin
+  OpenDocument('napoveda.txt');
 end;
 
 procedure TSestra.MenuItem7Click(Sender: TObject);
