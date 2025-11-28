@@ -1,7 +1,7 @@
 object Sestra: TSestra
-  Left = 1350
+  Left = 1280
   Height = 1099
-  Top = 222
+  Top = 194
   Width = 1107
   Caption = 'Sestra'
   ClientHeight = 1099
@@ -21,18 +21,28 @@ object Sestra: TSestra
     Color = clWindow
     Columns = <>
     DataSource = Pacient.DataSourceCekarna
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Font.Height = -24
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+    ParentFont = False
     TabOrder = 0
   end
   object DBGrid2: TDBGrid
     Left = 40
-    Height = 321
+    Height = 257
     Top = 408
-    Width = 480
+    Width = 416
     Color = clWindow
-    Columns = <>
+    Columns = <    
+      item
+        Title.Caption = 'TypVykonu'
+        Width = 135
+        FieldName = 'TypVykonu'
+      end>
     DataSource = DataSourceVykon2
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Font.Height = -24
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+    OptionsExtra = [dgeCheckboxColumn]
+    ParentFont = False
     TabOrder = 1
   end
   object Button1: TButton

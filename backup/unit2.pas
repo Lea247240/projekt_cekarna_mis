@@ -168,7 +168,7 @@ begin
     Pacient.SQLQueryCekarna.Close;
     Pacient.SQLQueryCekarna.Open;
 
-    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + ' do vyšetřovny ' + cisloVysetrovny);
+    Pacient.NastavitDalsiNaRade('Další na řadě: ' + IntToStr(cisloFronty) + ' do vyšetřovny číslo ' + cisloVysetrovny);
 
     // 3) Hlaska
     ShowMessage('Pacient ' + jmenoPacienta + ' byl vyzván do vyšetřovny ' + cisloVysetrovny + '.');

@@ -1,32 +1,36 @@
 object Vysetrovny: TVysetrovny
-  Left = 972
-  Height = 868
-  Top = 320
-  Width = 1290
+  Left = 784
+  Height = 725
+  Top = 394
+  Width = 944
   Caption = 'Vysetrovny'
-  ClientHeight = 868
-  ClientWidth = 1290
+  ClientHeight = 725
+  ClientWidth = 944
   Color = 16759773
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
   object DBGrid1: TDBGrid
-    Left = 120
-    Height = 272
-    Top = 152
-    Width = 896
-    Color = clWindow
+    Left = 224
+    Height = 344
+    Top = 168
+    Width = 504
+    Color = clWhite
     Columns = <    
       item
         Title.Caption = 'Cislo'
+        Width = 57
         FieldName = 'Cislo'
       end    
       item
         Title.Caption = 'Doktor'
+        Width = 77
         FieldName = 'Doktor'
       end>
     DataSource = Sestra.DataSourceVysetrovna
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Font.Height = -30
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
     OptionsExtra = [dgeCheckboxColumn]
+    ParentFont = False
     TabOrder = 0
   end
 end

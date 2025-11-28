@@ -2,33 +2,64 @@ object ObjednaniPacienti: TObjednaniPacienti
   Left = 565
   Height = 876
   Top = 304
-  Width = 1671
+  Width = 1449
   Caption = 'ObjednaniPacienti'
   ClientHeight = 876
-  ClientWidth = 1671
+  ClientWidth = 1449
   Color = 11206570
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
   object DBGrid1: TDBGrid
-    Left = 56
-    Height = 326
+    Left = 128
+    Height = 512
     Top = 216
-    Width = 648
+    Width = 688
     Color = clWindow
-    Columns = <>
+    Columns = <    
+      item
+        Title.Caption = 'PacientID'
+        Width = 124
+        FieldName = 'PacientID'
+      end    
+      item
+        Title.Caption = 'Jmeno'
+        Width = 90
+        FieldName = 'Jmeno'
+      end    
+      item
+        Title.Caption = 'Telefon'
+        Width = 101
+        FieldName = 'Telefon'
+      end    
+      item
+        Title.Caption = 'Heslo'
+        Width = 79
+        FieldName = 'Heslo'
+      end>
     DataSource = Pacient.DataSourcePacient
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Font.Height = -26
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+    OptionsExtra = [dgeCheckboxColumn]
+    ParentFont = False
     TabOrder = 0
   end
   object DBGrid2: TDBGrid
-    Left = 784
+    Left = 952
     Height = 321
-    Top = 216
-    Width = 568
+    Top = 296
+    Width = 352
     Color = clWindow
-    Columns = <>
+    Columns = <    
+      item
+        Title.Caption = 'TypVykonu'
+        Width = 144
+        FieldName = 'TypVykonu'
+      end>
     DataSource = Pacient.DataSourceVykon
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Font.Height = -26
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+    OptionsExtra = [dgeCheckboxColumn]
+    ParentFont = False
     TabOrder = 1
   end
 end

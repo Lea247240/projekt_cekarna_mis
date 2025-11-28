@@ -1,11 +1,11 @@
 object Pacient: TPacient
-  Left = 1325
+  Left = 474
   Height = 1150
-  Top = 230
-  Width = 1143
+  Top = 210
+  Width = 779
   Caption = 'Pacient'
   ClientHeight = 1150
-  ClientWidth = 1143
+  ClientWidth = 779
   Color = 16707548
   DesignTimePPI = 144
   KeyPreview = True
@@ -27,6 +27,8 @@ object Pacient: TPacient
     Height = 33
     Top = 160
     Width = 256
+    EchoMode = emPassword
+    PasswordChar = '*'
     TabOrder = 1
     Visible = False
   end

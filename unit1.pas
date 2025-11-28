@@ -174,7 +174,8 @@ begin
   SQLQueryCekarna.Close;
   SQLQueryCekarna.Open;
 
-  LabelRada.Caption :=  'Vaše pořadové číslo je: ' + IntToStr(dalsiPoradi)
+  LabelRada.Caption :=  'Vaše pořadové číslo je: ' + IntToStr(dalsiPoradi);
+  EditHeslo.Text := '';
 
 
 end;
@@ -194,10 +195,6 @@ procedure TPacient.NastavitDalsiNaRade(const s: string);
 begin
   LabelDalsi.Caption := s;
 end;
-
-
-
-
 
 
 end.

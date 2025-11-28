@@ -1,10 +1,65 @@
 object ObjednaniPacienti: TObjednaniPacienti
-  Left = 1047
+  Left = 565
   Height = 876
-  Top = 288
-  Width = 1160
+  Top = 304
+  Width = 1493
   Caption = 'ObjednaniPacienti'
+  ClientHeight = 876
+  ClientWidth = 1493
   Color = 11206570
   DesignTimePPI = 144
   LCLVersion = '4.4.0.0'
+  object DBGrid1: TDBGrid
+    Left = 128
+    Height = 512
+    Top = 216
+    Width = 688
+    Color = clWindow
+    Columns = <    
+      item
+        Title.Caption = 'PacientID'
+        Width = 124
+        FieldName = 'PacientID'
+      end    
+      item
+        Title.Caption = 'Jmeno'
+        Width = 90
+        FieldName = 'Jmeno'
+      end    
+      item
+        Title.Caption = 'Telefon'
+        Width = 101
+        FieldName = 'Telefon'
+      end    
+      item
+        Title.Caption = 'Heslo'
+        Width = 79
+        FieldName = 'Heslo'
+      end>
+    DataSource = Pacient.DataSourcePacient
+    Font.Height = -26
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+    OptionsExtra = [dgeCheckboxColumn]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object DBGrid2: TDBGrid
+    Left = 952
+    Height = 321
+    Top = 296
+    Width = 376
+    Color = clWindow
+    Columns = <    
+      item
+        Title.Caption = 'TypVykonu'
+        Width = 144
+        FieldName = 'TypVykonu'
+      end>
+    DataSource = Pacient.DataSourceVykon
+    Font.Height = -26
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+    OptionsExtra = [dgeCheckboxColumn]
+    ParentFont = False
+    TabOrder = 1
+  end
 end
