@@ -62,10 +62,11 @@ object Pacient: TPacient
     Caption = '             '
   end
   object Button1: TButton
-    Left = 2376
-    Height = 38
+    Left = 2384
+    Height = 35
     Top = 24
-    Width = 169
+    Width = 146
+    AutoSize = True
     Caption = 'Sesterske okno'
     TabOrder = 3
     OnClick = OtevriSestru

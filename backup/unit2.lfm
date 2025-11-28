@@ -81,10 +81,11 @@ object Sestra: TSestra
     ParentFont = False
   end
   object ButtonPacient: TButton
-    Left = 1521
-    Height = 38
-    Top = 109
-    Width = 113
+    Left = 2376
+    Height = 35
+    Top = 24
+    Width = 154
+    AutoSize = True
     Caption = 'Pacientske okno'
     TabOrder = 4
     OnClick = ButtonPacientClick
