@@ -1,1 +1,62 @@
-Zde je napsaná nápověda
+Nápověda – stručná uživatelská příručka :-)
+
+1. Pacientské okno
+
+ - Zadejte své heslo a stiskněte OK.
+
+ - Zobrazí se vaše pořadové číslo v čekárně.
+
+ - Až budete na řadě, objeví se hláška s informací, do kterých dveří máte vstoupit.
+
+2. Sesterské okno
+
+ - V tabulce „Čekárna“ vidíte všechny právě přihlášené pacienty.
+
+ - V menu lze zobrazit objednané pacienty a naplánované výkony.
+
+ - Kliknutím na pacienta zobrazíte jeho detailní informace.
+
+3. Posílání pacienta do dveří
+
+ - Vyberte pacienta v čekárně.
+
+ - Zvolte dveře, do kterých má být poslán.
+
+ - Potvrďte akci (Yes) nebo ji zrušte (No).
+
+ - Po potvrzení se pacient odstraní z fronty a na jeho panelu se zobrazí oznámení.
+
+4. Přehled vyšetřoven
+
+ - V menu vyšetřoven vidíte, který lékař pracuje v jakých dveřích.
+
+ - Slouží pro rychlé směrování pacientů.
+
+5. Nový den
+
+ - Funkce „Nový den“ vymaže celou čekárnu a resetuje pořadové číslování.
+
+ - Používejte pouze na začátku pracovního dne.
+
+6. Informace o aplikaci
+
+ - Zde najdete verzi programu a seznam autorů.
+
+
+
+V případě jakýchkoliv problémů nás prosím kontaktujte na e-mailové adrese: 
+
+podpora@cekarny-system.cz
+
+
+Při hlášení závady uveďte prosím:
+
+ - stručný popis problému
+
+ - čas, kdy se problém objevil
+
+ - číslo pacienta (pokud se týká čekárny)
+
+ - co jste dělali těsně před vznikem problému
+
+Děkujeme, že používáte náš systém.
