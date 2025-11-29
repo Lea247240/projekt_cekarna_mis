@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, SQLDB, DB, Forms, Controls, Graphics, Dialogs, DBGrids,
-  StdCtrls, DBCtrls, Menus, ActnList;
+  StdCtrls, DBCtrls, Menus, ActnList, ExtCtrls;
 
 type
 
@@ -35,6 +35,7 @@ type
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
+    Panel1: TPanel;
     PopupMenu1: TPopupMenu;
     SQLQueryDeleteCekarna: TSQLQuery;
     SQLQueryVysetrovna: TSQLQuery;
@@ -44,6 +45,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormResize(Sender: TObject);
     procedure UkazatAutory(Sender: TObject);
     procedure UkazatNapovedu(Sender: TObject);
     procedure NovyDen(Sender: TObject);
@@ -122,6 +124,33 @@ begin
 if Button = mbRight then
     PopupMenu1.Popup(Mouse.CursorPos.X, Mouse.CursorPos.Y)
 
+end;
+
+procedure TSestra.FormResize(Sender: TObject);
+const
+  mezera = 100;
+var
+  celkovaSirka: Integer;
+begin
+  celkovaSirka := DBGrid3.Width + mezera + DBGrid2.Width;
+
+  DBGrid3.Left := (Panel1.ClientWidth div 2) - (celkovaSirka div 2);
+
+  DBGrid2.Left := DBGrid3.Left + DBGrid3.Width + mezera;
+
+  DBGrid3.Top := Panel1.ClientHeight - DBGrid3.Height - 20;
+  DBGrid2.Top := DBGrid3.Top;
+
+
+  Button1.Left := (ClientWidth div 2) - (Button1.Width div 2);
+  Button1.Top := Panel1.Top + Panel1.Height + 15;
+
+  Label1.Left := (ClientWidth div 2) - (Label1.Width div 2);
+  Label1.Top := Button1.Top + Button1.Height + 40;
+
+
+  DBLookupComboBox1.Left := (ClientWidth div 2) - (DBLookupComboBox1.Width div 2);
+  DBLookupComboBox1.Top := Label1.Top + Label1.Height + 20;
 end;
 
 procedure TSestra.UkazatAutory(Sender: TObject);

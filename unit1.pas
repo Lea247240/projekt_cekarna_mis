@@ -21,11 +21,10 @@ type
     Label3: TLabel;
     LabelDalsi: TLabel;
     LabelRada: TLabel;
-    LabelInfo: TLabel;
+    Panel4: TPanel;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
-    Panel4: TPanel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
     SQLQueryCekarnaInsert: TSQLQuery;
@@ -44,7 +43,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure OtevriSestru(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Panel4Resize(Sender: TObject);
+    procedure Panel3Resize(Sender: TObject);
+    procedure Panel5Click(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
 
@@ -99,10 +99,15 @@ begin
 end;
 
 
-procedure TPacient.Panel4Resize(Sender: TObject);
+procedure TPacient.Panel3Resize(Sender: TObject);
 begin
-  Panel1.Left := (Panel4.Width - Panel1.Width) div 2;
-  Panel1.Top := (Panel4.Height - Panel1.Height) div 2;
+  Panel4.Left := (Panel3.Width - Panel4.Width) div 2;
+  Panel4.Top := (Panel3.Height - Panel4.Height) div 2;
+end;
+
+procedure TPacient.Panel5Click(Sender: TObject);
+begin
+
 end;
 
 
@@ -123,8 +128,7 @@ end;
 
 procedure TPacient.FormShow(Sender: TObject);
 begin
-  //Sestra.Show;
-
+    Panel1.Align := alTop;
 end;
 
 
@@ -142,10 +146,37 @@ end;
 
 procedure TPacient.FormResize(Sender: TObject);
 begin
+
+   Panel2.Top := Panel1.Top + Panel1.Height;
+   Panel3.Top := Panel2.Top + Panel2.Height;
+
+
+
+  ZadejHesloButton.Left := (ClientWidth div 2) - (ZadejHesloButton.Width div 2) - 350; // doprava
+  ZadejHesloButton.Top := Panel3.Top + Panel3.Height + 60;
+
+
+  Label3.Left := (ClientWidth div 2) - (Label3.Width div 2) - 20; // doprava
+  Label3.Top := Panel3.Top + Panel3.Height + 15;
+
+
+  EditHeslo.Left := (ClientWidth div 2) - (EditHeslo .Width div 2) - 10; // doprava
+  EditHeslo.Top := Panel3.Top + Panel3.Height + 70;
+
+
+
+  PotvrdHeslo.Left := (ClientWidth div 2) - (PotvrdHeslo.Width div 2) + 300; // doprava
+  PotvrdHeslo.Top := Panel3.Top + Panel3.Height + 60;
+
+
+  LabelRada.Left := (ClientWidth div 2) - (LabelRada.Width div 2); // doprava
+  LabelRada.Top := EditHeslo.Top + EditHeslo.Height + 30;
+
   Image1.Left := (ClientWidth div 2) - (Image1.Width div 2);
-  Image1.Top := ClientHeight - Image1.Height - 40;
+  Image1.Top := LabelRada.Top + LabelRada.Height + 40;
   Image2.Left := (ClientWidth div 2) - (Image2.Width div 2);
-  Image2.Top := ClientHeight - Image2.Height - 40;
+  Image2.Top := LabelRada.Top + LabelRada.Height + 40;
+
 
 end;
 

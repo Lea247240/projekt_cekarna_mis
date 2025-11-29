@@ -1,7 +1,7 @@
 object Sestra: TSestra
-  Left = 526
+  Left = 520
   Height = 1099
-  Top = 138
+  Top = 237
   Width = 1725
   Caption = 'Sestra'
   ClientHeight = 1099
@@ -16,79 +16,93 @@ object Sestra: TSestra
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnMouseDown = FormMouseDown
-  object DBGrid3: TDBGrid
-    Left = 736
-    Height = 304
-    Top = 448
-    Width = 480
-    Color = clWindow
-    Columns = <>
-    DataSource = Pacient.DataSourceCekarna
-    Font.Height = -24
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
-    ParentFont = False
-    TabOrder = 0
-  end
-  object DBGrid2: TDBGrid
-    Left = 1384
-    Height = 257
-    Top = 464
-    Width = 416
-    Color = clWindow
-    Columns = <    
-      item
-        Title.Caption = 'TypVykonu'
-        Width = 135
-        FieldName = 'TypVykonu'
-      end>
-    DataSource = DataSourceVykon2
-    Font.Height = -24
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
-    OptionsExtra = [dgeCheckboxColumn]
-    ParentFont = False
-    TabOrder = 1
+  OnResize = FormResize
+  object Panel1: TPanel
+    Left = 0
+    Height = 700
+    Top = 0
+    Width = 1725
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 700
+    ClientWidth = 1725
+    TabOrder = 2
+    object DBGrid3: TDBGrid
+      Left = 760
+      Height = 304
+      Top = 360
+      Width = 480
+      Align = alCustom
+      Color = clWindow
+      Columns = <>
+      DataSource = Pacient.DataSourceCekarna
+      Font.Height = -24
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+      ParentFont = False
+      TabOrder = 0
+    end
+    object DBGrid2: TDBGrid
+      Left = 1376
+      Height = 257
+      Top = 400
+      Width = 416
+      Color = clWindow
+      Columns = <      
+        item
+          Title.Caption = 'TypVykonu'
+          Width = 135
+          FieldName = 'TypVykonu'
+        end>
+      DataSource = DataSourceVykon2
+      Font.Height = -24
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgAutoSizeColumns]
+      OptionsExtra = [dgeCheckboxColumn]
+      ParentFont = False
+      TabOrder = 1
+    end
+    object ButtonPacient: TButton
+      Left = 1557
+      Height = 35
+      Top = 8
+      Width = 154
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      Caption = 'Pacientske okno'
+      TabOrder = 2
+      OnClick = ButtonPacientClick
+    end
   end
   object Button1: TButton
     Left = 1144
     Height = 64
-    Top = 824
+    Top = 744
     Width = 316
     AutoSize = True
     Caption = 'Zavolat pacienta'
     Font.Height = -40
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 0
     OnClick = ZavolatPacienta
   end
   object DBLookupComboBox1: TDBLookupComboBox
     Left = 1232
     Height = 49
-    Top = 1000
+    Top = 920
     Width = 150
     Font.Height = -30
     ListFieldIndex = 0
     LookupCache = False
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 1
   end
   object Label1: TLabel
     Left = 1192
     Height = 41
-    Top = 944
+    Top = 864
     Width = 221
     Caption = 'Číslo vyšetřovny:'
     Font.Height = -30
     ParentFont = False
-  end
-  object ButtonPacient: TButton
-    Left = 2376
-    Height = 35
-    Top = 24
-    Width = 154
-    AutoSize = True
-    Caption = 'Pacientske okno'
-    TabOrder = 4
-    OnClick = ButtonPacientClick
   end
   object SQLQueryVykon2: TSQLQuery
     FieldDefs = <>
