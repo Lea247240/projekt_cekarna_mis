@@ -23,6 +23,9 @@ type
     LabelRada: TLabel;
     LabelInfo: TLabel;
     Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
     PotvrdHeslo: TButton;
     EditHeslo: TEdit;
     SQLQueryCekarnaInsert: TSQLQuery;
@@ -37,9 +40,11 @@ type
     SQLQueryPacient: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure OtevriSestru(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Panel4Resize(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
 
@@ -94,6 +99,13 @@ begin
 end;
 
 
+procedure TPacient.Panel4Resize(Sender: TObject);
+begin
+  Panel1.Left := (Panel4.Width - Panel1.Width) div 2;
+  Panel1.Top := (Panel4.Height - Panel1.Height) div 2;
+end;
+
+
 procedure TPacient.ZobrazOkno;
 begin
   if WindowState = wsMinimized then
@@ -126,6 +138,15 @@ begin
     Sestra.ZobrazOkno;
     Key := 0;
   end;
+end;
+
+procedure TPacient.FormResize(Sender: TObject);
+begin
+  Image1.Left := (ClientWidth div 2) - (Image1.Width div 2);
+  Image1.Top := ClientHeight - Image1.Height - 40;
+  Image2.Left := (ClientWidth div 2) - (Image2.Width div 2);
+  Image2.Top := ClientHeight - Image2.Height - 40;
+
 end;
 
 

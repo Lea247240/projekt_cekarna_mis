@@ -172,6 +172,9 @@ begin
   Pacient.Image1.Visible := False;
   Pacient.Image2.Visible := False;
 
+  Pacient.Label3.Visible := False;
+  Pacient.EditHeslo.Visible := False;
+
 
   end;
 

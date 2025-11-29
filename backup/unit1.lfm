@@ -1,20 +1,21 @@
 object Pacient: TPacient
-  Left = 881
-  Height = 1150
-  Top = 165
-  Width = 1630
+  Left = 648
+  Height = 1051
+  Top = 222
+  Width = 1846
   Caption = 'Pacient'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 1051
+  ClientWidth = 1846
   Color = 12856126
   DesignTimePPI = 144
   KeyPreview = True
   PopupMode = pmExplicit
   Position = poDesktopCenter
   LCLVersion = '4.4.0.0'
-  WindowState = wsFullScreen
+  WindowState = wsMaximized
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
+  OnResize = FormResize
   OnShow = FormShow
   object ZadejHesloButton: TButton
     Left = 800
@@ -61,16 +62,6 @@ object Pacient: TPacient
     Width = 65
     Caption = '             '
   end
-  object Button1: TButton
-    Left = 2384
-    Height = 35
-    Top = 24
-    Width = 146
-    AutoSize = True
-    Caption = 'Sesterske okno'
-    TabOrder = 3
-    OnClick = OtevriSestru
-  end
   object LabelRada: TLabel
     Left = 1096
     Height = 1
@@ -86,31 +77,11 @@ object Pacient: TPacient
     ParentColor = False
     ParentFont = False
   end
-  object Panel1: TPanel
-    Left = 733
-    Height = 401
-    Top = 280
-    Width = 1064
-    ClientHeight = 401
-    ClientWidth = 1064
-    Color = clWhite
-    ParentBackground = False
-    ParentColor = False
-    TabOrder = 4
-    object LabelDalsi: TLabel
-      Left = 136
-      Height = 1
-      Top = 72
-      Width = 1
-      Font.Height = -90
-      ParentFont = False
-    end
-  end
   object Image1: TImage
     Left = 1088
     Height = 400
-    Top = 968
-    Width = 424
+    Top = 936
+    Width = 400
     Picture.Data = {
       0A544A706567496D61676572F10000FFD8FFE000104A46494600010100000100
       010000FFDB0084000505050505050506060508080708080B0A09090A0B110C0D
@@ -2050,10 +2021,10 @@ object Pacient: TPacient
     Visible = False
   end
   object Image2: TImage
-    Left = 1032
-    Height = 415
-    Top = 968
-    Width = 528
+    Left = 1016
+    Height = 408
+    Top = 936
+    Width = 544
     Picture.Data = {
       0A544A706567496D6167659FE80000FFD8FFE000104A46494600010100004800
       480000FFE1008C4578696600004D4D002A000000080005011200030000000100
@@ -3918,36 +3889,8 @@ object Pacient: TPacient
       661550FC45E37CAAC2F1D6D323796DE25E4D9C8A0B425E28D22B906D45E2A92A
       3594F7471144B2CA21EAFF00FFD9
     }
-    Stretch = True
+    Proportional = True
     Visible = False
-  end
-  object Label1: TLabel
-    Left = 1040
-    Height = 81
-    Top = 48
-    Width = 470
-    Caption = 'Vítejte v čekárně'
-    Font.CharSet = EASTEUROPE_CHARSET
-    Font.Color = clWhite
-    Font.Height = -60
-    Font.Pitch = fpVariable
-    Font.Quality = fqDraft
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object Label2: TLabel
-    Left = 904
-    Height = 54
-    Top = 168
-    Width = 766
-    Caption = 'Začněte zmáčknutím tlačítka Zadej heslo'
-    Font.CharSet = EASTEUROPE_CHARSET
-    Font.Color = clWhite
-    Font.Height = -40
-    Font.Pitch = fpVariable
-    Font.Quality = fqDraft
-    Font.Style = [fsBold]
-    ParentFont = False
   end
   object Label3: TLabel
     Left = 1160
@@ -3959,6 +3902,106 @@ object Pacient: TPacient
     Font.Height = -30
     ParentFont = False
     Visible = False
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 150
+    Top = 0
+    Width = 1846
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 150
+    ClientWidth = 1846
+    TabOrder = 3
+    object Label1: TLabel
+      Left = 0
+      Height = 150
+      Top = 0
+      Width = 1846
+      Align = alClient
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Vítejte v čekárně'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clWhite
+      Font.Height = -80
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 120
+    Top = 150
+    Width = 1846
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 120
+    ClientWidth = 1846
+    TabOrder = 4
+    object Label2: TLabel
+      Left = 0
+      Height = 120
+      Top = 0
+      Width = 1846
+      Align = alClient
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Začněte zmáčknutím tlačítka Zadej heslo'
+      Font.CharSet = EASTEUROPE_CHARSET
+      Font.Color = clWhite
+      Font.Height = -40
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      Layout = tlCenter
+      ParentFont = False
+    end
+  end
+  object Button1: TButton
+    Left = 1694
+    Height = 35
+    Top = 8
+    Width = 146
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    Caption = 'Sesterske okno'
+    TabOrder = 5
+    OnClick = OtevriSestru
+  end
+  object Panel4: TPanel
+    Left = 0
+    Height = 420
+    Top = 270
+    Width = 1846
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 420
+    ClientWidth = 1846
+    TabOrder = 6
+    OnResize = Panel4Resize
+    object Panel1: TPanel
+      Left = 720
+      Height = 401
+      Top = 0
+      Width = 1064
+      ClientHeight = 401
+      ClientWidth = 1064
+      Color = clWhite
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 0
+      object LabelDalsi: TLabel
+        Left = 136
+        Height = 1
+        Top = 72
+        Width = 1
+        Font.Height = -90
+        ParentFont = False
+      end
+    end
   end
   object SQLite3Connection1: TSQLite3Connection
     Connected = False
