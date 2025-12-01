@@ -19,6 +19,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    LabelTime: TLabel;
     LabelDalsi: TLabel;
     LabelRada: TLabel;
     Panel4: TPanel;
@@ -29,6 +30,7 @@ type
     EditHeslo: TEdit;
     SQLQueryCekarnaInsert: TSQLQuery;
     SQLQueryHeslo: TSQLQuery;
+    Timer1: TTimer;
     ZadejHesloButton: TButton;
     DataSourceCekarna: TDataSource;
     DataSourceVykon: TDataSource;
@@ -46,6 +48,7 @@ type
     procedure Panel3Resize(Sender: TObject);
     procedure Panel5Click(Sender: TObject);
     procedure PotvrdHesloClick(Sender: TObject);
+    procedure hodiny(Sender: TObject);
     procedure ZadejHesloButtonClick(Sender: TObject);
 
   private
@@ -91,9 +94,11 @@ begin
   else
     PosledniPoradi := 0;
 
+  // Ihned zobrazíme aktuální čas
+  LabelTime.Caption := FormatDateTime('hh:nn:ss', Now);
 
-
-
+  // Spustíme timer
+  Timer1.Enabled := True;
 
 
 end;
@@ -248,6 +253,11 @@ begin
   Image1.Visible := True;
 
 
+end;
+
+procedure TPacient.hodiny(Sender: TObject);
+begin
+  LabelTime.Caption := FormatDateTime('hh:nn:ss', Now);
 end;
 
 

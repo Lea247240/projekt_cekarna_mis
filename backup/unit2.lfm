@@ -4,8 +4,8 @@ object Sestra: TSestra
   Top = 237
   Width = 1725
   Caption = 'Sestra'
-  ClientHeight = 1099
-  ClientWidth = 1725
+  ClientHeight = 0
+  ClientWidth = 0
   Color = 16769503
   DesignTimePPI = 144
   KeyPreview = True
@@ -21,11 +21,11 @@ object Sestra: TSestra
     Left = 0
     Height = 700
     Top = 0
-    Width = 1725
+    Width = 0
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 700
-    ClientWidth = 1725
+    ClientWidth = 0
     TabOrder = 2
     object DBGrid3: TDBGrid
       Left = 760
@@ -61,7 +61,7 @@ object Sestra: TSestra
       TabOrder = 1
     end
     object ButtonPacient: TButton
-      Left = 1557
+      Left = -168
       Height = 35
       Top = 8
       Width = 154
